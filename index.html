@@ -392,14 +392,11 @@
   #app.sidebar-collapsed .nav-group-toggle .nav-caret,
   #app.sidebar-collapsed .sidebar-quickjump,
   #app.sidebar-collapsed .sidebar-foot span:not(.ico-svg),
-  #app.sidebar-collapsed #theme-toggle-label,
-  #app.sidebar-collapsed #lang-toggle-label,
-  #app.sidebar-collapsed #logout-btn-label{display:none;}
+  #app.sidebar-collapsed #theme-toggle-label{display:none;}
   #app.sidebar-collapsed .nav button{justify-content:center;padding:11px 8px;gap:0;}
   #app.sidebar-collapsed .nav-sublist{padding-left:0;}
   #app.sidebar-collapsed .nav-sublist.open{display:flex;flex-direction:column;gap:2px;}
-  #app.sidebar-collapsed #theme-toggle,#app.sidebar-collapsed #lang-toggle{padding:9px;}
-  #app.sidebar-collapsed .logout-btn{padding:9px;}
+  #app.sidebar-collapsed #theme-toggle{padding:9px;}
   @media (max-width:1024px){ .sidebar-collapse-btn{display:none;} }
   .sidebar-quickjump-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,0.45);font-weight:600;padding:0 10px 8px;}
   .sidebar-quickjump-list{display:flex;flex-direction:column;gap:2px;}
@@ -419,8 +416,6 @@
   .sidebar-foot .btn-ghost:hover{color:var(--chrome-text-strong);border-color:var(--brass);}
   .user-chip{display:flex;align-items:center;gap:8px;font-size:12.5px;color:#c9d2d8;margin-bottom:10px;}
   .user-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--moss);}
-  .logout-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,0.18);color:#e9e2d0;padding:9px;border-radius:var(--r-sm);font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;}
-  .logout-btn:hover{border-color:var(--brass);color:#fff;background:rgba(255,255,255,0.05);}
 
   /* ---------- Desktop app topbar (search / notifications / chat / user) ---------- */
   .content-col{display:flex;flex-direction:column;min-height:100vh;min-width:0;}
@@ -1229,11 +1224,7 @@
     <div class="sidebar-foot">
       <div style="display:flex;gap:6px;margin-bottom:10px;">
         <button class="btn btn-ghost btn-sm" id="theme-toggle" style="flex:1;" title="Thème"><svg class="ico-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg> <span id="theme-toggle-label">Sombre</span></button>
-        <button class="btn btn-ghost btn-sm" id="lang-toggle" style="flex:1;">
-          <svg class="ico-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg> <span id="lang-toggle-label">English</span>
-        </button>
       </div>
-      <button class="logout-btn" id="logout-btn"><svg class="ico-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> <span id="logout-btn-label">Se déconnecter</span></button>
     </div>
   </aside>
   <div class="content-col">
@@ -1257,14 +1248,14 @@
           <span class="sync-dot" id="sync-dot"></span>
           <span class="sync-label" id="sync-label" data-i18n="sync_checking">Connexion…</span>
         </span>
-        <button type="button" class="app-topbar-icon-btn admin-only" id="app-topbar-add-btn" title="Ajouter" aria-label="Ajouter">
+        <button type="button" class="app-topbar-icon-btn" data-perm-action="meres,enfants,documents,events" id="app-topbar-add-btn" title="Ajouter" aria-label="Ajouter">
           <svg class="ico-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div id="topbar-add-menu" class="topbar-popover" style="display:none;">
-          <button type="button" class="topbar-popover-item" id="add-menu-mere"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="btn_add_mere">+ Ajouter une mère</span></button>
-          <button type="button" class="topbar-popover-item" id="add-menu-enfant"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="btn_add_enfant">+ Ajouter un enfant</span></button>
-          <button type="button" class="topbar-popover-item" id="add-menu-document"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg><span data-i18n="btn_add_document">+ Ajouter un document</span></button>
-          <button type="button" class="topbar-popover-item" id="add-menu-event"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span data-i18n="btn_add_event">+ Ajouter un événement</span></button>
+          <button type="button" class="topbar-popover-item" data-perm-action="meres" id="add-menu-mere"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="btn_add_mere">+ Ajouter une mère</span></button>
+          <button type="button" class="topbar-popover-item" data-perm-action="enfants" id="add-menu-enfant"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-i18n="btn_add_enfant">+ Ajouter un enfant</span></button>
+          <button type="button" class="topbar-popover-item" data-perm-action="documents" id="add-menu-document"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg><span data-i18n="btn_add_document">+ Ajouter un document</span></button>
+          <button type="button" class="topbar-popover-item" data-perm-action="events" id="add-menu-event"><svg class="ico-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span data-i18n="btn_add_event">+ Ajouter un événement</span></button>
         </div>
         <button type="button" class="app-topbar-icon-btn" id="app-topbar-notify-btn" title="Notifications" aria-label="Notifications">
           <svg class="ico-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
@@ -1274,8 +1265,9 @@
           <svg class="ico-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
           <span id="topbar-activity-badge" class="topbar-badge-dot" style="display:none;"></span>
         </button>
-        <button type="button" class="app-topbar-icon-btn" id="app-topbar-help-btn" title="Aide" aria-label="Aide">
-          <svg class="ico-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 2-2.4 3.7"/><line x1="12" y1="17.2" x2="12.01" y2="17.2"/></svg>
+        <button type="button" class="app-topbar-icon-btn" id="lang-toggle" title="Langue / Language" aria-label="Langue / Language">
+          <svg class="ico-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+          <span id="lang-toggle-label" style="display:none;"></span>
         </button>
         <div class="app-topbar-user">
           <img id="user-chip-avatar" class="user-avatar-sm" style="display:none;" alt="">
@@ -1285,6 +1277,10 @@
             <span class="role-badge" id="user-role-badge"></span>
           </div>
         </div>
+        <button type="button" class="app-topbar-icon-btn" id="logout-btn" title="Se déconnecter" aria-label="Se déconnecter">
+          <svg class="ico-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span id="logout-btn-label" style="display:none;"></span>
+        </button>
       </div>
     </header>
     <main id="main"></main>
@@ -1364,6 +1360,14 @@
           <button type="button" class="launcher-item admin-only" data-view="compte" data-settings-tab="membres">
             <svg class="ico-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="16" y1="11" x2="22" y2="11"/></svg>
             <span data-i18n="launcher_access">Gestion des accès</span>
+          </button>
+          <button type="button" class="launcher-item" id="launcher-lang-toggle">
+            <svg class="ico-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg>
+            <span id="launcher-lang-toggle-label" data-i18n="lang_toggle">English</span>
+          </button>
+          <button type="button" class="launcher-item" id="launcher-logout-btn">
+            <svg class="ico-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span data-i18n="logout">Se déconnecter</span>
           </button>
         </div>
       </div>
@@ -1973,6 +1977,26 @@ const I18N = {
     doc_preview_unsupported:"Aperçu non disponible pour ce type de fichier, téléchargez-le pour le consulter.",
     btn_download_file:'Télécharger le fichier',
     doc_no_file:'Aucun fichier joint à ce document.',
+    restrict_section_title:"Restreindre l'accès",
+    restrict_enable_label:'Restreindre cet élément à certaines personnes',
+    restrict_mode_label:"Méthode d'accès",
+    restrict_mode_code:"Code d'accès partagé",
+    restrict_mode_members:'Membres spécifiques uniquement',
+    restrict_code_field_label:"Code d'accès",
+    restrict_code_placeholder:'ex : 4821',
+    restrict_members_field_label:'Qui peut voir cet élément',
+    restrict_no_accounts:"Aucun autre compte membre pour l'instant.",
+    toast_restrict_code_required:"Indiquez un code d'accès, ou choisissez la restriction par membres.",
+    toast_restrict_members_required:'Sélectionnez au moins un membre autorisé.',
+    restrict_locked_title:'Accès restreint',
+    restrict_locked_body:"Cet élément a été restreint par un administrateur. Saisissez le code d'accès pour l'ouvrir.",
+    btn_unlock:'Déverrouiller',
+    toast_code_required:"Saisissez un code d'accès.",
+    toast_code_wrong:'Code incorrect.',
+    restrict_locked_badge:'Restreint',
+    restrict_locked_card_title:'Élément restreint',
+    restrict_locked_card_body:"Un administrateur a limité l'accès à cet élément. Saisissez le code pour le consulter.",
+    restrict_no_access_toast:"Vous n'avez pas accès à cet élément.",
     confirm_delete_document_title:'Supprimer ce document ?',
     confirm_delete_document_body:(title)=>`Supprimer définitivement « ${title} » du coffre-fort documentaire ? Cette action est irréversible.`,
     ev_eyebrow:'Chronologie familiale',
@@ -2237,9 +2261,19 @@ const I18N = {
     journal_doc_deleted:(name)=>`Supprimé : ${name}`,
     journal_retention_note:'Les entrées du journal sont conservées 3 mois puis supprimées automatiquement (les fiches elles-mêmes conservent toujours leur propre date de modification).',
     btn_clear_journal:'Effacer le journal',
+    btn_select_all:'Tout sélectionner',
+    btn_deselect_all:'Tout désélectionner',
+    btn_delete_selected:'Supprimer la sélection',
+    journal_select_hint:"Cochez une ou plusieurs entrées pour les supprimer individuellement.",
+    btn_select_all:'Tout sélectionner',
+    btn_deselect_all:'Tout désélectionner',
+    btn_delete_selected:'Supprimer la sélection',
+    journal_select_hint:'Cochez les entrées à supprimer, ou sélectionnez-les toutes.',
     confirm_clear_journal_title:'Effacer le journal ?',
     confirm_clear_journal_body:"Cela supprime définitivement l'historique des documents et des connexions. Cette action est irréversible et nécessite votre mot de passe.",
+    confirm_clear_journal_selected_body:(n)=>`Cela supprime définitivement ${n} entrée${n>1?'s':''} du journal sélectionnée${n>1?'s':''}. Cette action est irréversible et nécessite votre mot de passe.`,
     toast_journal_cleared:'Journal effacé.',
+    toast_journal_entries_deleted:(n)=>`${n} entrée${n>1?'s':''} du journal supprimée${n>1?'s':''}.`,
     empty_journal:'Aucune modification enregistrée pour le moment.',
     confirm_delete_title:'Confirmer la suppression',
     confirm_delete_body:(label)=>`Voulez-vous vraiment supprimer ${label} ? Cette action est irréversible.`,
@@ -2550,6 +2584,26 @@ const I18N = {
     doc_preview_unsupported:'Preview not available for this file type, download it to view it.',
     btn_download_file:'Download file',
     doc_no_file:'No file attached to this document.',
+    restrict_section_title:'Restrict access',
+    restrict_enable_label:'Restrict this item to specific people',
+    restrict_mode_label:'Access method',
+    restrict_mode_code:'Shared access code',
+    restrict_mode_members:'Specific members only',
+    restrict_code_field_label:'Access code',
+    restrict_code_placeholder:'e.g. 4821',
+    restrict_members_field_label:'Who can see this',
+    restrict_no_accounts:'No other member accounts yet.',
+    toast_restrict_code_required:'Enter an access code, or choose member-based restriction instead.',
+    toast_restrict_members_required:'Select at least one allowed member.',
+    restrict_locked_title:'Restricted access',
+    restrict_locked_body:'This item was restricted by an administrator. Enter the access code to open it.',
+    btn_unlock:'Unlock',
+    toast_code_required:'Enter an access code.',
+    toast_code_wrong:'Incorrect code.',
+    restrict_locked_badge:'Restricted',
+    restrict_locked_card_title:'Restricted item',
+    restrict_locked_card_body:"An administrator limited access to this item. Enter the code to view it.",
+    restrict_no_access_toast:"You don't have access to this item.",
     confirm_delete_document_title:'Delete this document?',
     confirm_delete_document_body:(title)=>`Permanently delete "${title}" from the document vault? This action is irreversible.`,
     ev_eyebrow:'Family timeline',
@@ -2814,9 +2868,15 @@ const I18N = {
     journal_doc_deleted:(name)=>`Deleted: ${name}`,
     journal_retention_note:"Log entries are kept for 3 months and then deleted automatically (the records themselves always keep their own last-modified date).",
     btn_clear_journal:'Clear journal',
+    btn_select_all:'Select all',
+    btn_deselect_all:'Deselect all',
+    btn_delete_selected:'Delete selected',
+    journal_select_hint:'Check the entries you want to remove, or select them all.',
     confirm_clear_journal_title:'Clear the activity journal?',
     confirm_clear_journal_body:'This permanently deletes the document and login history. This action is irreversible and requires your password.',
+    confirm_clear_journal_selected_body:(n)=>`This permanently deletes ${n} selected journal ${n>1?'entries':'entry'}. This action is irreversible and requires your password.`,
     toast_journal_cleared:'Journal cleared.',
+    toast_journal_entries_deleted:(n)=>`${n} journal ${n>1?'entries':'entry'} deleted.`,
     empty_journal:'No changes recorded yet.',
     confirm_delete_title:'Confirm deletion',
     confirm_delete_body:(label)=>`Do you really want to delete ${label}? This action is irreversible.`,
@@ -3293,6 +3353,8 @@ function renderSidebarLabels(){
   if(logoutBtnLabel) logoutBtnLabel.textContent = t('logout');
   const langLabel = document.getElementById('lang-toggle-label');
   if(langLabel) langLabel.textContent = t('lang_toggle');
+  const launcherLangLabel = document.getElementById('launcher-lang-toggle-label');
+  if(launcherLangLabel) launcherLangLabel.textContent = t('lang_toggle');
   // Nav labels double as native tooltips (title attr) — needed once the
   // sidebar is collapsed to icon-only and the text itself is hidden.
   document.querySelectorAll('#nav-list > li > button[data-view], #nav-membres-sublist button[data-view]').forEach(btn=>{
@@ -4761,7 +4823,193 @@ const DEFAULT_PERMISSIONS = { dashboard:true, pere:true, meres:true, enfants:tru
 
 function isAdmin(){ return session && session.role === 'admin'; }
 function isManager(){ return !!(session && session.role === 'member' && session.isManager); }
-function canManage(){ return isAdmin() || isManager(); }
+/* canManage(): true for admins and managers unconditionally (full content
+   access). When a `perm` key is given, it's ALSO true for an ordinary
+   member who has been individually granted that specific permission
+   (see the per-member permission grid in Compte → Membres) — so a member
+   given the "documents" permission, say, can add/edit/delete documents
+   even without being a full manager. Called with no argument it stays
+   admin/manager-only, for actions no per-view permission ever covers
+   (managing other members, clearing the activity log, etc). */
+function canManage(perm){ if(isAdmin() || isManager()) return true; return perm ? !!can(perm) : false; }
+
+/* ---------- Content permission gating (buttons, not just nav) ----------
+   applyNavPermissions() (above) only ever gated which sidebar links show.
+   The actual add/edit/delete buttons inside each section used to be
+   hidden purely by a static "admin-only" CSS class tied to the account's
+   ROLE (admin/manager) — so a regular member granted a specific
+   permission (say "documents") in Compte → Membres still never saw an
+   add/edit/delete button anywhere, because the class didn't know about
+   per-section permissions at all. Buttons for content types a permission
+   can actually be granted for (père, mères, enfants, ancêtres/lignée,
+   documents, events) now carry data-perm-action="<perm>" instead (a
+   comma-separated list if a button should show when ANY of several
+   permissions is held), and this function shows/hides them by calling
+   canManage() with that key after every render — so a permitted member
+   gets the same buttons an admin or manager would see. Buttons that must
+   stay admin/manager-exclusive no matter what (managing member accounts,
+   danger-zone settings, generations, clearing the activity log) keep the
+   old role-based .admin-only class untouched. */
+function applyContentPermissions(){
+  document.querySelectorAll('[data-perm-action]').forEach(el=>{
+    const perms = el.dataset.permAction.split(',');
+    el.style.display = perms.some(p=>canManage(p)) ? '' : 'none';
+  });
+}
+
+/* ---------- Restricted access (admin-only lock on individual records) ----------
+   New authority for administrators (managers and ordinary members never
+   get this, no matter what permissions they hold): any document, event,
+   or family profile (père, mère, enfant, ancêtre) can be individually
+   locked so nobody else can view or open it, in one of two ways chosen
+   per record:
+     - "code": anyone who is given the access code can unlock it (the
+       code is checked against a plain-text field on the record — like
+       every other "security" claim already made elsewhere in this app,
+       this is an honesty-based deterrent, not real encryption, since a
+       client-only architecture has no way to hide it from someone who
+       inspects the data directly);
+     - "members": only the specific member accounts the admin names can
+       ever see it — nobody else, not even with a code, since there isn't
+       one in this mode.
+   The admin who set the lock (or any admin) can always see everything;
+   restrictions exist to hide things from OTHER people, never from the
+   person managing the family's data. A code unlock only lasts for the
+   current browser session (see unlockedRestrictedKeys) — reloading or
+   logging back in asks again, same as the rest of this app's session
+   model. */
+function canSetRestrictions(){ return isAdmin(); }
+function restrictionKey(type, record){ return type==='pere' ? 'pere' : (record && record.uid); }
+const unlockedRestrictedKeys = new Set();
+function hasRestrictedAccess(type, record){
+  if(!record || !record.restricted) return true;
+  if(isAdmin()) return true;
+  if(record.restrictMode === 'members') return (record.allowedEmails||[]).includes(session.email);
+  return unlockedRestrictedKeys.has(restrictionKey(type, record));
+}
+function unlockRestrictedKey(type, record){ unlockedRestrictedKeys.add(restrictionKey(type, record)); }
+
+/* Renders the admin-only "Restrict access" form section reused inside
+   every restrictable record's edit modal (document, event, père, mère,
+   enfant, ancêtre). `members` is the allFamilyMembersForPicker()-shaped
+   list to offer as the "specific members" allow-list — for family
+   profile records this is every OTHER profile's viewer accounts, but
+   since visibility is per member ACCOUNT (session.email), the checkbox
+   list here is built from the family's actual login accounts, passed in
+   by the caller as `accounts` ({email,name}[]). */
+function restrictSectionHtml(record, accounts){
+  const r = record || {};
+  const restricted = !!r.restricted;
+  const mode = r.restrictMode || 'code';
+  return `
+    <div class="form-section restrict-section">
+      <h4 style="display:flex;align-items:center;gap:7px;">${icon('lock',15)}${esc(t('restrict_section_title'))}</h4>
+      <label class="ev-member-option" style="margin-bottom:10px;">
+        <input type="checkbox" id="restrict-enabled" ${restricted?'checked':''}>
+        <span>${esc(t('restrict_enable_label'))}</span>
+      </label>
+      <div id="restrict-fields" style="display:${restricted?'':'none'};padding-left:2px;">
+        <div class="field full" style="margin-bottom:10px;">
+          <label>${esc(t('restrict_mode_label'))}</label>
+          <select id="restrict-mode">
+            <option value="code" ${mode==='code'?'selected':''}>${esc(t('restrict_mode_code'))}</option>
+            <option value="members" ${mode==='members'?'selected':''}>${esc(t('restrict_mode_members'))}</option>
+          </select>
+        </div>
+        <div class="field full" id="restrict-code-field" style="display:${mode==='code'?'':'none'};margin-bottom:10px;">
+          <label>${esc(t('restrict_code_field_label'))}</label>
+          <input type="text" id="restrict-code" value="${esc(r.accessCode||'')}" placeholder="${esc(t('restrict_code_placeholder'))}">
+        </div>
+        <div class="field full" id="restrict-members-field" style="display:${mode==='members'?'':'none'};">
+          <label>${esc(t('restrict_members_field_label'))}</label>
+          <div class="ev-member-picker">
+            ${accounts.map(a=>`
+              <label class="ev-member-option">
+                <input type="checkbox" class="restrict-member-check" value="${esc(a.email)}" ${(r.allowedEmails||[]).includes(a.email)?'checked':''}>
+                <span>${esc(a.name)} <small>(${esc(a.email)})</small></span>
+              </label>`).join('') || `<p style="font-size:12.5px;color:var(--ink-soft);margin:0;">${esc(t('restrict_no_accounts'))}</p>`}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+/* Wires the section rendered above (toggle + mode switch) inside
+   whichever modal it was placed in. Call once, right after the modal's
+   innerHTML is set. */
+function wireRestrictSection(modalEl){
+  const enabledCk = modalEl.querySelector('#restrict-enabled');
+  const fields = modalEl.querySelector('#restrict-fields');
+  const modeSel = modalEl.querySelector('#restrict-mode');
+  const codeField = modalEl.querySelector('#restrict-code-field');
+  const membersField = modalEl.querySelector('#restrict-members-field');
+  if(!enabledCk) return;
+  enabledCk.addEventListener('change', ()=>{ fields.style.display = enabledCk.checked ? '' : 'none'; });
+  if(modeSel){
+    modeSel.addEventListener('change', ()=>{
+      codeField.style.display = modeSel.value==='code' ? '' : 'none';
+      membersField.style.display = modeSel.value==='members' ? '' : 'none';
+    });
+  }
+}
+/* Reads the section back into plain data to merge onto the record being
+   saved. Returns null (and shows a toast) if "code" mode was chosen with
+   no code typed in — same validate-before-save pattern used everywhere
+   else in this app. */
+function readRestrictSection(modalEl){
+  const enabledCk = modalEl.querySelector('#restrict-enabled');
+  if(!enabledCk || !enabledCk.checked){
+    return { restricted:false, restrictMode:'code', accessCode:'', allowedEmails:[] };
+  }
+  const mode = modalEl.querySelector('#restrict-mode').value;
+  if(mode==='code'){
+    const code = modalEl.querySelector('#restrict-code').value.trim();
+    if(!code){ showToast(t('toast_restrict_code_required')); return null; }
+    return { restricted:true, restrictMode:'code', accessCode:code, allowedEmails:[] };
+  }
+  const allowedEmails = [...modalEl.querySelectorAll('.restrict-member-check:checked')].map(c=>c.value);
+  if(!allowedEmails.length){ showToast(t('toast_restrict_members_required')); return null; }
+  return { restricted:true, restrictMode:'members', accessCode:'', allowedEmails };
+}
+/* Small modal asking for the access code of one "code"-mode restricted
+   record. Calls onSuccess() only once the code matches (and remembers
+   the unlock for the rest of this session); otherwise leaves it locked
+   and shows a toast. */
+function promptAccessCode(type, record, onSuccess){
+  const backdrop = document.getElementById('modal-backdrop');
+  const modal = document.getElementById('modal');
+  modal.className = 'modal confirm-box';
+  modal.innerHTML = `
+    <div class="modal-head"><h3 style="display:flex;align-items:center;gap:8px;">${icon('lock',16)}${esc(t('restrict_locked_title'))}</h3><button class="modal-close" id="modal-close-btn">${icon('x',16)}</button></div>
+    <div class="modal-body">
+      <p style="margin:0 0 12px;color:var(--ink-2);font-size:13.5px;line-height:1.6;">${esc(t('restrict_locked_body'))}</p>
+      <input type="text" id="access-code-input" placeholder="${esc(t('restrict_code_placeholder'))}" style="width:100%;">
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="modal-cancel-btn">${esc(t('btn_cancel'))}</button>
+      <button class="btn btn-brass" id="access-code-submit">${esc(t('btn_unlock'))}</button>
+    </div>
+  `;
+  backdrop.classList.add('active');
+  function close(){ backdrop.classList.remove('active'); modal.innerHTML=''; modal.className='modal'; }
+  modal.querySelector('#modal-close-btn').addEventListener('click', close);
+  modal.querySelector('#modal-cancel-btn').addEventListener('click', close);
+  const input = modal.querySelector('#access-code-input');
+  function attempt(){
+    const val = input.value.trim();
+    if(!val){ showToast(t('toast_code_required')); return; }
+    if(val === (record.accessCode||'').trim()){
+      unlockRestrictedKey(type, record);
+      close();
+      onSuccess();
+    } else {
+      showToast(t('toast_code_wrong'));
+    }
+  }
+  modal.querySelector('#access-code-submit').addEventListener('click', attempt);
+  input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') attempt(); });
+  setTimeout(()=>{ if(input) input.focus(); }, 50);
+}
 
 /* ---------- Notifications: in-app "members" channel ---------- */
 function notificationsForMe(){
@@ -4935,7 +5183,7 @@ async function enterApp(){
   await loadDb();
   updateSyncIndicator();
   db.loginLog = db.loginLog || [];
-  db.loginLog.push({ at: new Date().toISOString(), by: session.name, email: session.email });
+  db.loginLog.push({ uid: uid(), at: new Date().toISOString(), by: session.name, email: session.email });
   if(db.loginLog.length > 30) db.loginLog = db.loginLog.slice(db.loginLog.length - 30);
   saveDbQuiet(); // fire-and-forget — never blocks entering the app
   currentView = 'dashboard';
@@ -4946,24 +5194,6 @@ async function enterApp(){
   autoLockMinutes = savedAutoLock !== null ? savedAutoLock : 15;
   bumpActivity();
   startAutoLockWatch();
-  logLoginEvent();
-}
-function logLoginEvent(){
-  const key = 'family:'+session.familyId+':loginlog';
-  storage.get(key, true).then(res=>{
-    let list = [];
-    try{ list = JSON.parse(res.value) || []; }catch(e){ list = []; }
-    list.push({ at: new Date().toISOString(), by: session.name });
-    if(list.length > 30) list = list.slice(list.length - 30);
-    return storage.set(key, JSON.stringify(list), true);
-  }).catch(()=>{
-    // First login ever for this family — nothing to merge with yet.
-    storage.set(key, JSON.stringify([{ at: new Date().toISOString(), by: session.name }]), true).catch(()=>{});
-  });
-}
-async function getLoginLog(){
-  try{ return JSON.parse((await storage.get('family:'+session.familyId+':loginlog', true)).value) || []; }
-  catch(e){ return []; }
 }
 
 /* ===================== CHATZONE (Family Messaging) =====================
@@ -5283,6 +5513,8 @@ document.getElementById('signup-form').addEventListener('submit', async function
 
 document.getElementById('lang-toggle-login').addEventListener('click', toggleLang);
 document.getElementById('lang-toggle').addEventListener('click', toggleLang);
+const launcherLangToggle = document.getElementById('launcher-lang-toggle');
+if(launcherLangToggle) launcherLangToggle.addEventListener('click', ()=>{ toggleLang(); closeLauncher(); });
 document.getElementById('theme-toggle-login').addEventListener('click', toggleTheme);
 
 /* ---------- Forgot password (administrator recovery) ---------- */
@@ -5391,6 +5623,8 @@ document.getElementById('logout-btn').addEventListener('click', async function()
   await revokeCurrentSession();
   clearAuthMessages();
 });
+const launcherLogoutBtn = document.getElementById('launcher-logout-btn');
+if(launcherLogoutBtn) launcherLogoutBtn.addEventListener('click', ()=>{ closeLauncher(); document.getElementById('logout-btn').click(); });
 
 document.getElementById('lock-form').addEventListener('submit', async function(e){
   e.preventDefault();
@@ -5513,8 +5747,6 @@ function openHelpModal(){
   modal.querySelector('#modal-cancel-btn').addEventListener('click', close);
   backdrop.addEventListener('click', function(e){ if(e.target===backdrop) close(); }, {once:true});
 }
-const topbarHelpBtn = document.getElementById('app-topbar-help-btn');
-if(topbarHelpBtn) topbarHelpBtn.addEventListener('click', openHelpModal);
 
 const topbarAddBtn = document.getElementById('app-topbar-add-btn');
 const topbarAddMenu = document.getElementById('topbar-add-menu');
@@ -5533,22 +5765,18 @@ if(topbarAddBtn && topbarAddMenu){
   });
   document.getElementById('add-menu-mere').addEventListener('click', ()=>{
     topbarAddMenu.style.display = 'none';
-    if(!canManage()) return;
     openMereModal();
   });
   document.getElementById('add-menu-enfant').addEventListener('click', ()=>{
     topbarAddMenu.style.display = 'none';
-    if(!canManage()) return;
     openEnfantModal();
   });
   document.getElementById('add-menu-document').addEventListener('click', ()=>{
     topbarAddMenu.style.display = 'none';
-    if(!canManage()) return;
     openDocumentModal();
   });
   document.getElementById('add-menu-event').addEventListener('click', ()=>{
     topbarAddMenu.style.display = 'none';
-    if(!canManage()) return;
     openEventModal();
   });
 }
@@ -5572,12 +5800,33 @@ if(topbarAddBtn && topbarAddMenu){
    findProfilRecord()/renderProfileSheet() use to look the record up. */
 const QUICKJUMP_VIEWS = ['pere','meres','enfants','profil','arbre'];
 function quickjumpItemsHtml(itemClass){
-  return db.meres.map(m=>`
+  return db.meres
+    .filter(m=>!(m.restricted && m.restrictMode==='members' && !hasRestrictedAccess('mere', m)))
+    .map(m=>{
+      if(!hasRestrictedAccess('mere', m)){
+        return `
+          <button type="button" class="${itemClass}" data-uid="${esc(m.uid)}" data-locked="1">
+            <span class="dot"></span>
+            <span style="display:flex;align-items:center;gap:5px;">${icon('lock',12)}${esc(t('restrict_locked_badge'))}</span>
+          </button>
+        `;
+      }
+      return `
     <button type="button" class="${itemClass}" data-uid="${esc(m.uid)}">
       <span class="dot"></span>
       <span>${esc(t('quickjump_branch')(m.prenom||m.nom||'—'))}</span>
     </button>
-  `).join('');
+  `;}).join('');
+}
+function quickjumpNavigate(uidVal, itemClass, extraOnDone){
+  const m = db.meres.find(x=>x.uid===uidVal);
+  const go = ()=>{ profilSelected = {type:'mere', uid: uidVal}; if(extraOnDone) extraOnDone(); goToView('profileSheet'); };
+  if(m && !hasRestrictedAccess('mere', m)){
+    if(m.restrictMode==='code') promptAccessCode('mere', m, go);
+    else showToast(t('restrict_no_access_toast'));
+    return;
+  }
+  go();
 }
 function updateSidebarQuickjump(){
   const hasBranches = db && (db.meres||[]).length > 0;
@@ -5591,10 +5840,7 @@ function updateSidebarQuickjump(){
     if(applicable){
       list.innerHTML = quickjumpItemsHtml('quickjump-item');
       list.querySelectorAll('.quickjump-item').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          profilSelected = {type:'mere', uid: btn.dataset.uid};
-          goToView('profileSheet');
-        });
+        btn.addEventListener('click', ()=>quickjumpNavigate(btn.dataset.uid, 'quickjump-item'));
       });
     }
   }
@@ -5608,11 +5854,7 @@ function updateSidebarQuickjump(){
     if(hasBranches){
       launcherList.innerHTML = quickjumpItemsHtml('launcher-quickjump-item');
       launcherList.querySelectorAll('.launcher-quickjump-item').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          profilSelected = {type:'mere', uid: btn.dataset.uid};
-          closeLauncher();
-          goToView('profileSheet');
-        });
+        btn.addEventListener('click', ()=>quickjumpNavigate(btn.dataset.uid, 'launcher-quickjump-item', closeLauncher));
       });
     }
   }
@@ -5698,6 +5940,7 @@ function render(){
   updateTopbarTitle();
   updateNotifyAndActivityBadges();
   updateSidebarQuickjump();
+  applyContentPermissions();
 
   if(restoreId){
     const el = document.getElementById(restoreId);
@@ -5804,7 +6047,7 @@ function renderDashboard(main){
     </div>
     <div class="panel">
       <div class="panel-head"><h3>${esc(t('panel_recent_children'))}</h3>
-        <button class="btn btn-brass admin-only" id="dash-add-enfant">${esc(t('btn_add_enfant'))}</button>
+        <button class="btn btn-brass" data-perm-action="enfants" id="dash-add-enfant">${esc(t('btn_add_enfant'))}</button>
       </div>
       <div class="panel-body">
         ${recentChildren.length ? `
@@ -5834,6 +6077,23 @@ function renderDashboard(main){
 function renderPere(main){
   const p = db.pere;
 
+  if(!hasRestrictedAccess('pere', p)){
+    main.innerHTML = `
+      <div class="page-head">
+        <p class="page-eyebrow">${esc(t('nav_pere'))}</p>
+        <h1 class="page-title" style="display:flex;align-items:center;gap:10px;">${icon('lock',22)}${esc(t('restrict_locked_card_title'))}</h1>
+      </div>
+      <div class="panel"><div class="panel-body" style="text-align:center;padding:40px 20px;">
+        <div style="margin-bottom:14px;">${icon('lock',40)}</div>
+        <p style="margin:0 0 14px;">${esc(t('restrict_locked_card_body'))}</p>
+        ${p.restrictMode==='code' ? `<button class="btn btn-brass" id="unlock-pere-btn">${esc(t('btn_unlock'))}</button>` : ''}
+      </div></div>
+    `;
+    const unlockBtn = document.getElementById('unlock-pere-btn');
+    if(unlockBtn) unlockBtn.addEventListener('click', ()=>promptAccessCode('pere', p, ()=>renderPere(main)));
+    return;
+  }
+
   main.innerHTML = `
     <div class="page-head">
       <div style="display:flex;justify-content:flex-end;margin-bottom:4px;">${socialLinksHtml(p)}</div>
@@ -5843,7 +6103,7 @@ function renderPere(main){
       <div class="panel-head"><h3>${esc(t('panel_patriarch_profile'))}</h3>
         <div class="toolbar">
           <button class="btn btn-ghost" id="print-pere-btn">${icon('printer',14)}${esc(t('btn_print'))}</button>
-          <button class="btn btn-brass admin-only" id="edit-pere-btn">${esc(t('btn_edit_profile'))}</button>
+          <button class="btn btn-brass" data-perm-action="pere" id="edit-pere-btn">${esc(t('btn_edit_profile'))}</button>
         </div>
       </div>
       <div class="panel-body">
@@ -5884,8 +6144,10 @@ function renderPere(main){
   document.getElementById('print-pere-btn').addEventListener('click', ()=>printProfile(t('nav_pere'), p, PERE_SECTIONS));
 }
 
-function openPereModal(){
+async function openPereModal(){
+  if(!canManage('pere')){ showToast(t('admin_only_toast')); return; }
   const p = db.pere;
+  const restrictAccounts = canSetRestrictions() ? await getFamilyMemberAccounts() : [];
   const bodyHtml = PERE_SECTIONS.map(sec => `
     <div class="form-section">
       <h4>${esc(ts(sec.title))}</h4>
@@ -5899,12 +6161,13 @@ function openPereModal(){
       <div id="carriere-rows"></div>
       <button type="button" class="btn btn-ghost" id="add-carriere-row" style="margin-top:8px;">${esc(t('btn_add_carriere'))}</button>
     </div>
-  `;
+  ` + (canSetRestrictions() ? restrictSectionHtml(p, restrictAccounts) : '');
 
   openModal({
     title: t('modal_edit_pere'),
     bodyHtml,
     onMount(modalEl){
+      wireRestrictSection(modalEl);
       attachPhotoHandlers(modalEl);
 
       // "Date de décès" appears automatically once "Décédé" is selected,
@@ -5974,6 +6237,11 @@ function openPereModal(){
       p.carriere = modalEl._getCarriere();
       p.updatedAt = new Date().toISOString();
       p.updatedBy = session.name;
+      if(canSetRestrictions()){
+        const restrictData = readRestrictSection(modalEl);
+        if(restrictData === null) return false;
+        Object.assign(p, restrictData);
+      }
       recomputePereId();
       saveDb();
       showToast(t('toast_pere_updated'));
@@ -5986,9 +6254,11 @@ function openPereModal(){
 
 function renderMeres(main){
   const q = searchState.meres.toLowerCase();
-  const list = db.meres.filter(m =>
-    !q || (m.prenom+' '+m.nom+' '+m.idMere).toLowerCase().includes(q)
-  );
+  const list = db.meres.filter(m => {
+    if(m.restricted && m.restrictMode==='members' && !hasRestrictedAccess('mere', m)) return false;
+    if(!hasRestrictedAccess('mere', m)) return true; // locked row: skip name search, name is hidden anyway
+    return !q || (m.prenom+' '+m.nom+' '+m.idMere).toLowerCase().includes(q);
+  });
 
   main.innerHTML = `
     <div class="page-head">
@@ -6001,7 +6271,7 @@ function renderMeres(main){
         <div class="toolbar">
           <input class="search-input" id="mere-search" placeholder="${esc(t('search_ph_name_id'))}" value="${esc(searchState.meres)}">
         </div>
-        <button class="btn btn-brass admin-only" id="add-mere-btn">${esc(t('btn_add_mere'))}</button>
+        <button class="btn btn-brass" data-perm-action="meres" id="add-mere-btn">${esc(t('btn_add_mere'))}</button>
       </div>
       <div class="panel-body">
         ${list.length ? `
@@ -6009,12 +6279,24 @@ function renderMeres(main){
           <thead><tr><th></th><th>${esc(t('th_id'))}</th><th>${esc(t('th_name'))}</th><th>${esc(t('th_order'))}</th><th>${esc(t('th_birth'))}</th><th>${esc(t('th_status'))}</th><th>${esc(t('th_children'))}</th><th></th></tr></thead>
           <tbody>
             ${list.map(m=>{
+              if(!hasRestrictedAccess('mere', m)){
+                return `
+                <tr class="row-locked" data-uid="${m.uid}" data-locked="1">
+                  <td>${icon('lock',18)}</td>
+                  <td>—</td>
+                  <td style="display:flex;align-items:center;gap:6px;">${icon('lock',12)} ${esc(t('restrict_locked_card_title'))}</td>
+                  <td>—</td><td>—</td>
+                  <td><span class="tag">${esc(t('restrict_locked_badge'))}</span></td>
+                  <td>—</td>
+                  <td></td>
+                </tr>`;
+              }
               const nbChildren = db.enfants.filter(c=>c.idMere===m.idMere).length;
               return `
               <tr>
                 <td>${avatarHtml(m.photo, m.prenom+' '+m.nom, 32)}</td>
                 <td><span class="id-chip">${esc(m.idMere)}</span></td>
-                <td>${esc(m.prenom)} ${esc(m.nom)}</td>
+                <td>${esc(m.prenom)} ${esc(m.nom)} ${m.restricted ? `<span title="${esc(t('restrict_locked_badge'))}">${icon('lock',11)}</span>` : ''}</td>
                 <td>${esc(m.ordre||'—')}</td>
                 <td>${fmtDate(m.naissance)}</td>
                 <td><span class="tag ${m.statut==='Décédé'?'tag-dead':'tag-alive'}">${esc(tOpt(m.statut)||'—')}</span></td>
@@ -6022,8 +6304,8 @@ function renderMeres(main){
                 <td>
                   <div class="row-actions">
                     <button class="icon-btn view-mere" data-uid="${m.uid}" title="${esc(t('view_profile'))}">${icon('eye',14)}</button>
-                    <button class="icon-btn edit-mere admin-only" data-uid="${m.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
-                    <button class="icon-btn delete-mere admin-only" data-uid="${m.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
+                    <button class="icon-btn edit-mere" data-perm-action="meres" data-uid="${m.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
+                    <button class="icon-btn delete-mere" data-perm-action="meres" data-uid="${m.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
                   </div>
                 </td>
               </tr>`;
@@ -6044,11 +6326,20 @@ function renderMeres(main){
     profilSelected = {type:'mere', uid:b.dataset.uid};
     goToView('profileSheet');
   }));
+  main.querySelectorAll('.row-locked').forEach(row=>{
+    row.addEventListener('click', ()=>{
+      const m = db.meres.find(x=>x.uid===row.dataset.uid);
+      if(m && m.restrictMode==='code') promptAccessCode('mere', m, ()=>{ profilSelected={type:'mere',uid:m.uid}; goToView('profileSheet'); });
+      else showToast(t('restrict_no_access_toast'));
+    });
+  });
 }
 
-function openMereModal(recordUid){
+async function openMereModal(recordUid){
+  if(!canManage('meres')){ showToast(t('admin_only_toast')); return; }
   const isNew = !recordUid;
   const record = isNew ? {statut:'Vivant', carriere:[]} : db.meres.find(m=>m.uid===recordUid);
+  const restrictAccounts = canSetRestrictions() ? await getFamilyMemberAccounts() : [];
   const bodyHtml = MERE_SECTIONS.map(sec => `
     <div class="form-section">
       <h4>${esc(ts(sec.title))}</h4>
@@ -6062,12 +6353,13 @@ function openMereModal(recordUid){
       <div id="carriere-rows-mere"></div>
       <button type="button" class="btn btn-ghost" id="add-carriere-row-mere" style="margin-top:8px;">${esc(t('btn_add_carriere'))}</button>
     </div>
-  `;
+  ` + (canSetRestrictions() ? restrictSectionHtml(record, restrictAccounts) : '');
 
   openModal({
     title: isNew ? t('modal_add_mere') : t('modal_edit_record')(esc(record.prenom), esc(record.nom)),
     bodyHtml,
     onMount(modalEl){
+      wireRestrictSection(modalEl);
       attachPhotoHandlers(modalEl);
 
       // "Date de divorce" appears automatically once "Divorcé(e)" is chosen,
@@ -6175,6 +6467,11 @@ function openMereModal(recordUid){
       data.carriere = modalEl._getCarriereMere();
       data.updatedAt = new Date().toISOString();
       data.updatedBy = session.name;
+      if(canSetRestrictions()){
+        const restrictData = readRestrictSection(modalEl);
+        if(restrictData === null) return false;
+        Object.assign(data, restrictData);
+      }
       if(isNew){
         data.uid = uid();
         db.meres.push(data);
@@ -6194,9 +6491,11 @@ function openMereModal(recordUid){
 
 function renderEnfants(main){
   const q = searchState.enfants.toLowerCase();
-  const list = db.enfants.filter(c =>
-    !q || (c.prenom+' '+c.nom+' '+c.idUnique).toLowerCase().includes(q)
-  );
+  const list = db.enfants.filter(c => {
+    if(c.restricted && c.restrictMode==='members' && !hasRestrictedAccess('enfant', c)) return false;
+    if(!hasRestrictedAccess('enfant', c)) return true; // locked row: skip name search, name is hidden anyway
+    return !q || (c.prenom+' '+c.nom+' '+c.idUnique).toLowerCase().includes(q);
+  });
 
   main.innerHTML = `
     <div class="page-head">
@@ -6209,7 +6508,7 @@ function renderEnfants(main){
         <div class="toolbar">
           <input class="search-input" id="enfant-search" placeholder="${esc(t('search_ph_name_id'))}" value="${esc(searchState.enfants)}">
         </div>
-        <button class="btn btn-brass admin-only" id="add-enfant-btn">${esc(t('btn_add_enfant'))}</button>
+        <button class="btn btn-brass" data-perm-action="enfants" id="add-enfant-btn">${esc(t('btn_add_enfant'))}</button>
       </div>
       <div class="panel-body">
         ${list.length ? `
@@ -6217,12 +6516,23 @@ function renderEnfants(main){
           <thead><tr><th></th><th>${esc(t('th_id'))}</th><th>${esc(t('th_name'))}</th><th>${esc(t('th_gender'))}</th><th>${esc(t('th_birth'))}</th><th>${esc(t('th_age'))}</th><th>${esc(t('th_mere'))}</th><th>${esc(t('th_status'))}</th><th></th></tr></thead>
           <tbody>
             ${list.map(c=>{
+              if(!hasRestrictedAccess('enfant', c)){
+                return `
+                <tr class="row-locked" data-uid="${c.uid}" data-locked="1">
+                  <td>${icon('lock',18)}</td>
+                  <td>—</td>
+                  <td style="display:flex;align-items:center;gap:6px;">${icon('lock',12)} ${esc(t('restrict_locked_card_title'))}</td>
+                  <td>—</td><td>—</td><td>—</td>
+                  <td><span class="tag">${esc(t('restrict_locked_badge'))}</span></td>
+                  <td></td>
+                </tr>`;
+              }
               const mother = db.meres.find(m=>m.idMere===c.idMere);
               return `
               <tr>
                 <td>${avatarHtml(c.photo, c.prenom+' '+c.nom, 32)}</td>
                 <td><span class="id-chip">${esc(c.idUnique)}</span></td>
-                <td>${esc(c.prenom)} ${esc(c.nom)}</td>
+                <td>${esc(c.prenom)} ${esc(c.nom)} ${c.restricted ? `<span title="${esc(t('restrict_locked_badge'))}">${icon('lock',11)}</span>` : ''}</td>
                 <td>${esc(tOpt(c.genre)||'—')}</td>
                 <td>${fmtDate(c.naissance)}</td>
                 <td>${calcAge(c.naissance)}</td>
@@ -6231,8 +6541,8 @@ function renderEnfants(main){
                 <td>
                   <div class="row-actions">
                     <button class="icon-btn view-enfant" data-uid="${c.uid}" title="${esc(t('view_profile'))}">${icon('eye',14)}</button>
-                    <button class="icon-btn edit-enfant admin-only" data-uid="${c.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
-                    <button class="icon-btn delete-enfant admin-only" data-uid="${c.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
+                    <button class="icon-btn edit-enfant" data-perm-action="enfants" data-uid="${c.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
+                    <button class="icon-btn delete-enfant" data-perm-action="enfants" data-uid="${c.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
                   </div>
                 </td>
               </tr>`;
@@ -6253,11 +6563,20 @@ function renderEnfants(main){
     profilSelected = {type:'enfant', uid:b.dataset.uid};
     goToView('profileSheet');
   }));
+  main.querySelectorAll('.row-locked').forEach(row=>{
+    row.addEventListener('click', ()=>{
+      const c = db.enfants.find(x=>x.uid===row.dataset.uid);
+      if(c && c.restrictMode==='code') promptAccessCode('enfant', c, ()=>{ profilSelected={type:'enfant',uid:c.uid}; goToView('profileSheet'); });
+      else showToast(t('restrict_no_access_toast'));
+    });
+  });
 }
 
-function openEnfantModal(recordUid, presetMereId){
+async function openEnfantModal(recordUid, presetMereId){
+  if(!canManage('enfants')){ showToast(t('admin_only_toast')); return; }
   const isNew = !recordUid;
   const record = isNew ? {genre:'Masculin', status:'Vivant', idMere: presetMereId || '', carriere:[]} : db.enfants.find(c=>c.uid===recordUid);
+  const restrictAccounts = canSetRestrictions() ? await getFamilyMemberAccounts() : [];
   const bodyHtml = ENFANT_SECTIONS.map(sec => `
     <div class="form-section">
       <h4>${esc(ts(sec.title))}</h4>
@@ -6271,12 +6590,13 @@ function openEnfantModal(recordUid, presetMereId){
       <div id="carriere-rows-enfant"></div>
       <button type="button" class="btn btn-ghost" id="add-carriere-row-enfant" style="margin-top:8px;">${esc(t('btn_add_carriere'))}</button>
     </div>
-  `;
+  ` + (canSetRestrictions() ? restrictSectionHtml(record, restrictAccounts) : '');
 
   openModal({
     title: isNew ? t('modal_add_enfant') : t('modal_edit_record')(esc(record.prenom), esc(record.nom)),
     bodyHtml,
     onMount(modalEl){
+      wireRestrictSection(modalEl);
       attachPhotoHandlers(modalEl);
 
       // "Date de décès" appears automatically once "Décédé" is selected,
@@ -6378,6 +6698,11 @@ function openEnfantModal(recordUid, presetMereId){
       data.carriere = modalEl._getCarriereEnfant();
       data.updatedAt = new Date().toISOString();
       data.updatedBy = session.name;
+      if(canSetRestrictions()){
+        const restrictData = readRestrictSection(modalEl);
+        if(restrictData === null) return false;
+        Object.assign(data, restrictData);
+      }
       if(isNew){
         data.uid = uid();
         db.enfants.push(data);
@@ -6463,6 +6788,7 @@ function renderProfil(main){
   const anyFilterActive = q || !profilFilters.pere || !profilFilters.mere || !profilFilters.enfant || !profilFilters.ancetre || profilFilters.status!=='all' || profilFilters.genre!=='all';
   const candidates = profilCandidates().filter(p=>{
     if(!profilFilters[p.type]) return false;
+    if(p.record.restricted && p.record.restrictMode==='members' && !hasRestrictedAccess(p.type, p.record)) return false;
     if(profilFilters.status!=='all' && recordAliveStatus(p.type, p.record) !== (profilFilters.status==='vivant')) return false;
     if(profilFilters.genre!=='all'){
       if(p.type==='enfant'){ if(p.record.genre !== profilFilters.genre) return false; }
@@ -6470,6 +6796,7 @@ function renderProfil(main){
       else if(p.type==='mere'){ if(profilFilters.genre !== 'Féminin') return false; }
       // ancêtres have no reliable gender field — never excluded by this filter
     }
+    if(!hasRestrictedAccess(p.type, p.record)) return true; // locked result: skip name search, name is hidden anyway
     if(q){
       const r = p.record;
       const hay = `${r.prenom||''} ${r.nom||''} ${r.postnom||''} ${r.idMere||r.idUnique||r.idAncetre||''}`.toLowerCase();
@@ -6507,16 +6834,27 @@ function renderProfil(main){
         ${anyFilterActive ? (candidates.length ? `
           <div style="margin-top:16px;">
             <div style="font-size:12px;color:var(--ink-soft);margin-bottom:8px;">${esc(t('search_result_count')(candidates.length))}</div>
-            ${candidates.map(p=>`
+            ${candidates.map(p=>{
+              if(!hasRestrictedAccess(p.type, p.record)){
+                return `
+                <div class="profile-result" data-type="${p.type}" data-uid="${p.uid}" data-locked="1">
+                  <div class="seal" style="background:var(--parchment-2);display:flex;align-items:center;justify-content:center;">${icon('lock',18)}</div>
+                  <div>
+                    <div class="rname" style="display:flex;align-items:center;gap:6px;">${icon('lock',13)} ${esc(t('restrict_locked_card_title'))}</div>
+                    <div class="rtype">${esc(t('restrict_locked_badge'))}</div>
+                  </div>
+                </div>`;
+              }
+              return `
               <div class="profile-result" data-type="${p.type}" data-uid="${p.uid}">
                 ${avatarHtml(p.record.photo, p.record.prenom+' '+p.record.nom, 40)}
                 <div>
-                  <div class="rname">${esc(p.record.prenom)} ${esc(p.record.nom)}</div>
+                  <div class="rname">${esc(p.record.prenom)} ${esc(p.record.nom)} ${p.record.restricted ? `<span title="${esc(t('restrict_locked_badge'))}">${icon('lock',11)}</span>` : ''}</div>
                   <div class="rtype">${esc(p.label)}</div>
                 </div>
                 <span class="tag ${recordAliveStatus(p.type,p.record)?'tag-alive':'tag-dead'}" style="margin-left:auto;">${esc(recordAliveStatus(p.type,p.record)?t('filter_status_alive'):t('filter_status_dead'))}</span>
               </div>
-            `).join('')}
+            `;}).join('')}
           </div>` : `<div class="empty-state" style="padding-top:24px;"><div class="big">${icon('search',40)}</div>${q ? esc(t('no_results_for')(profilSearch)) : esc(t('empty_profil'))}</div>`
         ) : `<div class="empty-state" style="padding-top:24px;"><div class="big">${icon('search',40)}</div>${esc(t('search_hint'))}</div>`}
       </div>
@@ -6539,6 +6877,16 @@ function renderProfil(main){
   });
   main.querySelectorAll('.profile-result').forEach(el=>{
     el.addEventListener('click', ()=>{
+      if(el.dataset.locked){
+        const p = candidates.find(x=>x.type===el.dataset.type && String(x.uid)===el.dataset.uid);
+        const record = p && p.record;
+        if(record && record.restrictMode==='code'){
+          promptAccessCode(el.dataset.type, record, ()=>{ profilSelected = {type: el.dataset.type, uid: el.dataset.uid}; goToView('profileSheet'); });
+        } else {
+          showToast(t('restrict_no_access_toast'));
+        }
+        return;
+      }
       profilSelected = {type: el.dataset.type, uid: el.dataset.uid};
       goToView('profileSheet');
     });
@@ -6732,9 +7080,27 @@ function renderProfileSheet(main){
     document.getElementById('sheet-back-btn').addEventListener('click', ()=>goToView('profil'));
     return;
   }
+  if(!hasRestrictedAccess(sel.type, record)){
+    main.innerHTML = `
+      <div class="page-head">
+        <button type="button" class="btn-link-forgot" id="sheet-back-btn">${icon('arrowLeft',12)} ${esc(t('btn_back_to_search'))}</button>
+      </div>
+      <div class="empty-state"><div class="big">${icon('lock',40)}</div>
+        <p style="margin:0 0 14px;">${esc(t('restrict_locked_card_body'))}</p>
+        ${record.restrictMode==='code' ? `<button class="btn btn-brass" id="sheet-unlock-btn">${icon('lock',14)}${esc(t('btn_unlock'))}</button>` : ''}
+      </div>
+    `;
+    document.getElementById('sheet-back-btn').addEventListener('click', ()=>goToView('profil'));
+    const unlockBtn = document.getElementById('sheet-unlock-btn');
+    if(unlockBtn) unlockBtn.addEventListener('click', ()=>{
+      promptAccessCode(sel.type, record, ()=>renderProfileSheet(main));
+    });
+    return;
+  }
   const sections = sectionsFor(sel.type);
   const visibleSections = sections.filter(sec=>sec.title!=='Photo de profil');
   const typeLabel = sel.type==='pere' ? t('type_pere') : sel.type==='mere' ? t('type_mere') : sel.type==='ancetre' ? t('type_ancetre') : t('type_enfant');
+  const sheetEditPerm = sel.type==='pere' ? 'pere' : sel.type==='mere' ? 'meres' : sel.type==='ancetre' ? 'arbre' : 'enfants';
 
   main.innerHTML = `
     <div class="page-head">
@@ -6747,7 +7113,7 @@ function renderProfileSheet(main){
         <div class="toolbar">
           <button class="btn btn-ghost" id="sheet-print-btn">${icon('printer',14)}${esc(t('btn_print'))}</button>
           <button class="btn btn-ghost" id="sheet-email-btn">${icon('mail',14)}${esc(t('btn_send_profile_email'))}</button>
-          <button class="btn btn-brass admin-only" id="sheet-edit-btn">${esc(t('btn_edit_profile'))}</button>
+          <button class="btn btn-brass" data-perm-action="${sheetEditPerm}" id="sheet-edit-btn">${esc(t('btn_edit_profile'))}</button>
         </div>
       </div>
       <div class="panel-body">
@@ -6958,28 +7324,41 @@ function computeTreeLayout(){
     const startX = (totalWidth - list.length*NODE_PITCH)/2 + NODE_PITCH/2;
     list.forEach((a,i)=>{
       const x = startX + i*NODE_PITCH;
+      const locked = !hasRestrictedAccess('ancetre', a);
       nodes.push({ id:'anc_'+a.uid, type:'ancetre', uid:a.uid, x, y:rowY['gen'+g.num],
-        label:`${a.prenom||''} ${a.nomComplet||''}`.trim()||'—', sub:a.relation||ts(g.title),
-        photo:a.photo, alive: a.statut==='Vivant', hasStatus: !!a.statut });
+        label: locked ? t('restrict_locked_badge') : `${a.prenom||''} ${a.nomComplet||''}`.trim()||'—',
+        sub: locked ? '' : (a.relation||ts(g.title)),
+        photo: locked ? null : a.photo, alive: a.statut==='Vivant', hasStatus: !locked && !!a.statut,
+        locked, restrictMode: a.restrictMode });
       if(x !== trunkX) edges.push({x1:x, y1:rowY['gen'+g.num], x2:trunkX, y2:rowY['gen'+g.num]});
     });
   });
 
   const pName = `${db.pere.prenom||''} ${db.pere.nom||''}`.trim() || '—';
+  const pereLocked = !hasRestrictedAccess('pere', db.pere);
   nodes.push({ id:'pere', type:'pere', uid:'pere', x:trunkX, y:rowY.pere,
-    label:pName, sub:t('type_pere'), photo:db.pere.photo, alive: db.pere.statut!=='Décédé', hasStatus:true });
+    label: pereLocked ? t('restrict_locked_badge') : pName,
+    sub: pereLocked ? '' : t('type_pere'),
+    photo: pereLocked ? null : db.pere.photo, alive: db.pere.statut!=='Décédé', hasStatus: !pereLocked,
+    locked: pereLocked, restrictMode: db.pere.restrictMode });
 
   motherPositions.forEach(pos=>{
     const mx = (pos.startCol + pos.span/2) * NODE_PITCH;
+    const mereLocked = !hasRestrictedAccess('mere', pos.m);
     nodes.push({ id:'mere_'+pos.m.uid, type:'mere', uid:pos.m.uid, x:mx, y:rowY.meres,
-      label:`${pos.m.prenom||''} ${pos.m.nom||''}`.trim()||'—', sub:pos.m.idMere||t('type_mere'),
-      photo:pos.m.photo, alive: pos.m.statut!=='Décédé', hasStatus:true });
+      label: mereLocked ? t('restrict_locked_badge') : `${pos.m.prenom||''} ${pos.m.nom||''}`.trim()||'—',
+      sub: mereLocked ? '' : (pos.m.idMere||t('type_mere')),
+      photo: mereLocked ? null : pos.m.photo, alive: pos.m.statut!=='Décédé', hasStatus: !mereLocked,
+      locked: mereLocked, restrictMode: pos.m.restrictMode });
     edges.push({x1:trunkX, y1:rowY.pere, x2:mx, y2:rowY.meres});
     pos.children.forEach((c,i)=>{
       const cx = pos.startCol*NODE_PITCH + (i+0.5)*NODE_PITCH;
+      const enfantLocked = !hasRestrictedAccess('enfant', c);
       nodes.push({ id:'enf_'+c.uid, type:'enfant', uid:c.uid, x:cx, y:rowY.enfants,
-        label:`${c.prenom||''} ${c.nom||''}`.trim()||'—', sub:c.naissance?String(new Date(c.naissance).getFullYear()):'',
-        photo:c.photo, alive: c.status!=='Décédé', hasStatus:true });
+        label: enfantLocked ? t('restrict_locked_badge') : `${c.prenom||''} ${c.nom||''}`.trim()||'—',
+        sub: enfantLocked ? '' : (c.naissance?String(new Date(c.naissance).getFullYear()):''),
+        photo: enfantLocked ? null : c.photo, alive: c.status!=='Décédé', hasStatus: !enfantLocked,
+        locked: enfantLocked, restrictMode: c.restrictMode });
       edges.push({x1:mx, y1:rowY.meres, x2:cx, y2:rowY.enfants});
     });
   });
@@ -6989,10 +7368,12 @@ function computeTreeLayout(){
 function treeNodeSvg(n){
   const r = 26;
   const ringClass = n.hasStatus ? (n.alive ? 'alive' : 'dead') : '';
-  const photoClip = n.photo
+  const photoClip = n.locked
+    ? `<circle cx="0" cy="0" r="${r-6}" fill="none" stroke="var(--brass-dark)" stroke-width="1.6"></circle><g transform="scale(0.7) translate(-12,-12)" style="fill:none;stroke:var(--brass-dark);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;">${ICON_PATHS.lock}</g>`
+    : n.photo
     ? `<clipPath id="clip-${n.id}"><circle cx="0" cy="0" r="${r-3}"/></clipPath><image href="${esc(n.photo)}" x="${-(r-3)}" y="${-(r-3)}" width="${(r-3)*2}" height="${(r-3)*2}" clip-path="url(#clip-${n.id})" preserveAspectRatio="xMidYMid slice"></image>`
     : `<text x="0" y="6" text-anchor="middle" font-size="18" font-weight="700" style="fill:var(--brass-dark);font-family:var(--font-heading);">${esc(initialsOf(n.label))}</text>`;
-  return `<g class="tree-node" data-type="${n.type}" data-uid="${esc(n.uid)}" transform="translate(${n.x},${n.y})">
+  return `<g class="tree-node" data-type="${n.type}" data-uid="${esc(n.uid)}" data-locked="${n.locked?'1':'0'}" transform="translate(${n.x},${n.y})">
     <circle class="tn-ring ${ringClass}" r="${r}"></circle>
     ${photoClip}
     <text class="tn-name" x="0" y="${r+16}" text-anchor="middle">${esc(n.label.length>16?n.label.slice(0,15)+'…':n.label)}</text>
@@ -7003,19 +7384,31 @@ function treeNodeSvg(n){
    branch containing her own children, giving a sub-family overview
    without needing the full ascendance/descendance tree view. */
 function renderBranchesHtml(){
-  const meres = db.meres || [];
+  const meres = (db.meres || []).filter(m=>!(m.restricted && m.restrictMode==='members' && !hasRestrictedAccess('mere', m)));
   if(!meres.length) return `<div class="empty-state"><div class="big">${icon('users',40)}</div>${esc(t('empty_meres'))}</div>`;
   return `<div class="doc-grid">
     ${meres.map(m=>{
+      if(!hasRestrictedAccess('mere', m)){
+        return `
+        <div class="doc-card branch-card branch-card-locked" data-uid="${esc(m.uid)}" data-locked="1">
+          <div style="display:flex;align-items:center;gap:12px;padding:16px 16px 0;">
+            <div class="seal" style="background:var(--parchment-2);display:flex;align-items:center;justify-content:center;">${icon('lock',20)}</div>
+            <div>
+              <div class="doc-card-title" style="margin:0;display:flex;align-items:center;gap:6px;">${icon('lock',13)} ${esc(t('restrict_locked_card_title'))}</div>
+              <div class="doc-card-owner">${esc(t('restrict_locked_badge'))}</div>
+            </div>
+          </div>
+        </div>`;
+      }
       const kids = (db.enfants||[]).filter(c=>c.idMere===m.idMere);
       const boys = kids.filter(c=>c.genre==='Masculin').length;
       const girls = kids.filter(c=>c.genre==='Féminin').length;
       return `
-      <div class="doc-card branch-card" data-uid="${esc(m.idMere)}">
+      <div class="doc-card branch-card" data-uid="${esc(m.uid)}">
         <div style="display:flex;align-items:center;gap:12px;padding:16px 16px 0;">
           ${avatarHtml(m.photo, (m.prenom||'')+' '+(m.nom||''), 44)}
           <div>
-            <div class="doc-card-title" style="margin:0;">${esc(m.prenom)} ${esc(m.nom)}</div>
+            <div class="doc-card-title" style="margin:0;">${esc(m.prenom)} ${esc(m.nom)} ${m.restricted ? `<span title="${esc(t('restrict_locked_badge'))}">${icon('lock',11)}</span>` : ''}</div>
             <div class="doc-card-owner">${esc(t('branch_label')(kids.length))}</div>
           </div>
         </div>
@@ -7074,13 +7467,26 @@ function initTreeViz(){
   host.querySelectorAll('.tree-node').forEach(node=>{
     node.addEventListener('click', ()=>{
       if(moved) return;
+      const type = node.dataset.type, uidVal = node.dataset.uid;
+      if(node.dataset.locked === '1'){
+        const record = findProfilRecord(type, uidVal);
+        if(record && record.restrictMode==='code'){
+          promptAccessCode(type, record, ()=>{
+            if(treeVizClickMode === 'event-member'){ eventFilters.member = `${type}:${uidVal}`; eventsTab = 'timeline'; render(); }
+            else { profilSelected = {type, uid: uidVal}; goToView('profileSheet'); }
+          });
+        } else {
+          showToast(t('restrict_no_access_toast'));
+        }
+        return;
+      }
       if(treeVizClickMode === 'event-member'){
-        eventFilters.member = `${node.dataset.type}:${node.dataset.uid}`;
+        eventFilters.member = `${type}:${uidVal}`;
         eventsTab = 'timeline';
         render();
         return;
       }
-      profilSelected = { type: node.dataset.type, uid: node.dataset.uid };
+      profilSelected = { type, uid: uidVal };
       goToView('profileSheet');
     });
   });
@@ -7091,17 +7497,29 @@ function ancestorSpouseName(a){
   return spouse ? `${spouse.prenom||''} ${spouse.nomComplet||''}`.replace(/\s+/g,' ').trim() : '';
 }
 function ancetreCardHtml(a){
+  if(!hasRestrictedAccess('ancetre', a)){
+    return `
+      <div class="ancetre-card ancetre-card-locked" data-uid="${esc(a.uid)}" data-locked="1" style="cursor:pointer;">
+        <div class="ancetre-card-head">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--parchment-2);display:flex;align-items:center;justify-content:center;flex:none;">${icon('lock',20)}</div>
+          <div>
+            <div class="ancetre-card-name" style="display:flex;align-items:center;gap:6px;">${icon('lock',13)} ${esc(t('restrict_locked_card_title'))}</div>
+            <div class="ancetre-card-relation">${esc(t('restrict_locked_badge'))}</div>
+          </div>
+        </div>
+      </div>`;
+  }
   const statutTag = a.statut==='Vivant' ? 'tag-alive' : a.statut==='Décédé' ? 'tag-dead' : '';
   return `
     <div class="ancetre-card">
       <div class="ancetre-card-actions">
-        <button class="icon-btn edit-ancetre admin-only" data-uid="${a.uid}" title="${esc(t('btn_edit'))}" aria-label="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
-        <button class="icon-btn delete-ancetre admin-only" data-uid="${a.uid}" title="${esc(t('btn_delete'))}" aria-label="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
+        <button class="icon-btn edit-ancetre" data-perm-action="arbre" data-uid="${a.uid}" title="${esc(t('btn_edit'))}" aria-label="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
+        <button class="icon-btn delete-ancetre" data-perm-action="arbre" data-uid="${a.uid}" title="${esc(t('btn_delete'))}" aria-label="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
       </div>
       <div class="ancetre-card-head">
         ${avatarHtml(a.photo, (a.prenom||'')+' '+(a.nomComplet||''), 48)}
         <div>
-          <div class="ancetre-card-name">${esc(a.prenom)} ${esc(a.nomComplet)}</div>
+          <div class="ancetre-card-name">${esc(a.prenom)} ${esc(a.nomComplet)} ${a.restricted ? `<span title="${esc(t('restrict_locked_badge'))}">${icon('lock',11)}</span>` : ''}</div>
           <div class="ancetre-card-relation">${esc(a.relation || '—')}</div>
           <div class="ancetre-card-id">${esc(a.idAncetre)}</div>
         </div>
@@ -7161,7 +7579,7 @@ function renderArbre(main){
     <div class="panel">
       <div class="panel-body">
         <div class="tree-toolbar">
-          <button class="btn btn-brass admin-only" id="tree-add-mere">${esc(t('btn_add_mere'))}</button>
+          <button class="btn btn-brass" data-perm-action="meres" id="tree-add-mere">${esc(t('btn_add_mere'))}</button>
         </div>
         <div class="tree">
           <div class="tree-father">
@@ -7171,7 +7589,7 @@ function renderArbre(main){
               <div class="sub">${esc(tOpt(p.statut)||'')} · ${esc(t('epouses_count')(db.meres.length))} · ${esc(t('enfants_count')(db.enfants.length))}</div>
             </div>
             <div class="tree-node-actions">
-              <button class="btn btn-ghost btn-sm tree-edit-pere admin-only">${icon('edit',14)}${esc(t('btn_edit'))}</button>
+              <button class="btn btn-ghost btn-sm tree-edit-pere" data-perm-action="pere">${icon('edit',14)}${esc(t('btn_edit'))}</button>
             </div>
           </div>
           <div class="tree-line"></div>
@@ -7189,8 +7607,8 @@ function renderArbre(main){
                     </div>
                   </div>
                   <div class="mhead-actions">
-                    <button class="icon-btn tree-edit-mere admin-only" data-uid="${m.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
-                    <button class="icon-btn tree-delete-mere admin-only" data-uid="${m.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
+                    <button class="icon-btn tree-edit-mere" data-perm-action="meres" data-uid="${m.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
+                    <button class="icon-btn tree-delete-mere" data-perm-action="meres" data-uid="${m.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
                   </div>
                 </div>
                 ${children.length ? children.map(c=>`
@@ -7201,12 +7619,12 @@ function renderArbre(main){
                       <span class="cyear">${c.naissance ? new Date(c.naissance).getFullYear() : '—'}</span>
                     </div>
                     <div class="child-actions">
-                      <button class="icon-btn tree-edit-enfant admin-only" data-uid="${c.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
-                      <button class="icon-btn tree-delete-enfant admin-only" data-uid="${c.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
+                      <button class="icon-btn tree-edit-enfant" data-perm-action="enfants" data-uid="${c.uid}" title="${esc(t('btn_edit'))}">${icon('edit',14)}</button>
+                      <button class="icon-btn tree-delete-enfant" data-perm-action="enfants" data-uid="${c.uid}" title="${esc(t('btn_delete'))}">${icon('trash',14)}</button>
                     </div>
                   </div>`).join('') : `<div class="no-children">${esc(t('empty_children_node'))}</div>`}
                 <div class="mother-block-foot">
-                  <button class="btn btn-ghost btn-sm tree-add-enfant admin-only" data-mere="${m.idMere}">${esc(t('btn_add_enfant'))}</button>
+                  <button class="btn btn-ghost btn-sm tree-add-enfant" data-perm-action="enfants" data-mere="${m.idMere}">${esc(t('btn_add_enfant'))}</button>
                 </div>
               </div>`;
             }).join('')}
@@ -7229,7 +7647,7 @@ function renderArbre(main){
             <div class="name" style="margin-top:10px;">${esc(p.prenom)} ${esc(p.nom)} ${esc(p.postnom||'')}</div>
             <div class="sub">${esc(tOpt(p.statut)||'')}${p.naissance ? esc(t('born_on')(fmtDate(p.naissance))) : ''}${p.lieuNaissance ? esc(t('in_place')(p.lieuNaissance)) : ''}</div>
             <div class="tree-node-actions">
-              <button class="btn btn-ghost btn-sm lignee-edit-pere admin-only">${icon('edit',14)}${esc(t('btn_edit_pere_short'))}</button>
+              <button class="btn btn-ghost btn-sm lignee-edit-pere" data-perm-action="pere">${icon('edit',14)}${esc(t('btn_edit_pere_short'))}</button>
             </div>
           </div>
         </div>
@@ -7244,7 +7662,7 @@ function renderArbre(main){
                 <span class="lignee-gen-num">${g.num}</span>
                 <h3 class="lignee-gen-title">${esc(g.title)}</h3>
               </div>
-              <button class="btn btn-brass btn-sm add-ancetre admin-only" data-gen="${esc(g.value)}">${esc(t('btn_add_ancetre'))}</button>
+              <button class="btn btn-brass btn-sm add-ancetre" data-perm-action="arbre" data-gen="${esc(g.value)}">${esc(t('btn_add_ancetre'))}</button>
             </div>
             ${list.length
               ? `<div class="ancetre-grid">${list.map(ancetreCardHtml).join('')}</div>`
@@ -7272,7 +7690,7 @@ function renderArbre(main){
 
     <div class="panel origine-panel">
       <div class="panel-head"><h3>${esc(t('panel_origine'))}</h3>
-        <button class="btn btn-brass btn-sm admin-only" id="edit-origine-btn">${icon('edit',14)}${esc(t('btn_edit_origine'))}</button>
+        <button class="btn btn-brass btn-sm" data-perm-action="arbre" id="edit-origine-btn">${icon('edit',14)}${esc(t('btn_edit_origine'))}</button>
       </div>
       <div class="panel-body">
         <div class="origine-grid">
@@ -7289,6 +7707,12 @@ function renderArbre(main){
   main.querySelectorAll('.arbre-tab').forEach(b=>b.addEventListener('click', ()=>{ arbreTab = b.dataset.tab; renderArbre(main); }));
   main.querySelectorAll('.branch-card').forEach(card=>{
     card.addEventListener('click', ()=>{
+      if(card.dataset.locked){
+        const m = db.meres.find(x=>x.uid===card.dataset.uid);
+        if(m && m.restrictMode==='code') promptAccessCode('mere', m, ()=>{ profilSelected={type:'mere',uid:m.uid}; goToView('profileSheet'); });
+        else showToast(t('restrict_no_access_toast'));
+        return;
+      }
       profilSelected = {type:'mere', uid: card.dataset.uid};
       goToView('profileSheet');
     });
@@ -7355,11 +7779,12 @@ function renderArbre(main){
   }
 }
 
-function openAncetreModal(recordUid, presetGeneration){
-  if(!canManage()){ showToast(t('admin_only_toast')); return; }
+async function openAncetreModal(recordUid, presetGeneration){
+  if(!canManage('arbre')){ showToast(t('admin_only_toast')); return; }
   const isNew = !recordUid;
   const record = isNew ? {statut:'Vivant', generation: presetGeneration || ''} : db.ancetres.find(a=>a.uid===recordUid);
   ancetreModalExcludeUid = isNew ? null : record.uid;
+  const restrictAccounts = canSetRestrictions() ? await getFamilyMemberAccounts() : [];
   const bodyHtml = ANCETRE_SECTIONS.map(sec => `
     <div class="form-section">
       <h4>${esc(ts(sec.title))}</h4>
@@ -7367,12 +7792,13 @@ function openAncetreModal(recordUid, presetGeneration){
         ${sec.fields.map(f => renderFieldInput(f, f.derive ? f.derive(record) : record[f.key])).join('')}
       </div>
     </div>
-  `).join('');
+  `).join('') + (canSetRestrictions() ? restrictSectionHtml(record, restrictAccounts) : '');
 
   openModal({
     title: isNew ? t('modal_add_ancetre') : t('modal_edit_record')(esc(record.prenom||''), esc(record.nomComplet||'')),
     bodyHtml,
     onMount(modalEl){
+      wireRestrictSection(modalEl);
       attachPhotoHandlers(modalEl);
       // The ID is fully derived from generation + genre + birth year, so it
       // stays read-only and updates live as those fields change.
@@ -7446,6 +7872,11 @@ function openAncetreModal(recordUid, presetGeneration){
       }
       data.updatedAt = new Date().toISOString();
       data.updatedBy = session.name;
+      if(canSetRestrictions()){
+        const restrictData = readRestrictSection(modalEl);
+        if(restrictData === null) return false;
+        Object.assign(data, restrictData);
+      }
       if(isNew){
         data.uid = uid();
         db.ancetres.push(data);
@@ -7461,7 +7892,7 @@ function openAncetreModal(recordUid, presetGeneration){
 }
 
 function openOrigineModal(){
-  if(!canManage()){ showToast(t('admin_only_toast')); return; }
+  if(!canManage('arbre')){ showToast(t('admin_only_toast')); return; }
   const o = db.origine || (db.origine = {});
   const bodyHtml = ORIGINE_SECTIONS.map(sec => `
     <div class="form-section">
@@ -7494,13 +7925,26 @@ function openOrigineModal(){
    A private, per-family vault for scanned documents (IDs, passports,
    certificates, medical records, insurance, legal papers), plus broader
    family memory-keeping: recipes, voice notes, and other heritage items —
-   each one taggable to a specific père/mère/enfant. Files themselves live
-   in Supabase Storage (see uploadFileAndGetUrl); this app keeps only the
-   lightweight record (title, category, owner, and the file's URL).
-   "Secure" here means role-based visibility (the same permission system
-   that gates every other section, toggled per member by the admin) and
-   admin/manager-only upload/edit/delete — not server-side encryption,
-   which this architecture has no way to provide honestly. */
+   each one taggable to a specific père/mère/enfant/ancêtre. Files
+   themselves live in Supabase Storage (see uploadFileAndGetUrl); this app
+   keeps only the lightweight record (title, category, owner, and the
+   file's URL). "Secure" here means role-based/permission-based
+   visibility (the same permission system that gates every other
+   section) — not server-side encryption, which this architecture has no
+   way to provide honestly. */
+
+/* The family's actual login accounts (email + name), used to populate
+   the "specific members" allow-list when restricting a record — distinct
+   from allFamilyMembersForPicker() above, which lists family-tree DATA
+   records (père/mères/enfants/ancêtres), not the accounts people log in
+   with. Access restriction is enforced per ACCOUNT (session.email), so
+   this is the correct list for that picker. */
+async function getFamilyMemberAccounts(){
+  const family = await getFamily(session.familyId);
+  const memberEmails = family.memberEmails || [];
+  const accounts = (await Promise.all(memberEmails.map(e=>getUser(e)))).filter(Boolean);
+  return accounts.map(a=>({ email:a.email, name:a.name||a.email }));
+}
 
 function allFamilyMembersForPicker(){
   const list = [];
@@ -7509,18 +7953,24 @@ function allFamilyMembersForPicker(){
   }
   db.meres.forEach(m=>list.push({ type:'mere', uid:m.uid, name:`${m.prenom||''} ${m.nom||''}`.trim(), sub:t('type_mere') }));
   db.enfants.forEach(c=>list.push({ type:'enfant', uid:c.uid, name:`${c.prenom||''} ${c.nom||''}`.trim(), sub:t('type_enfant') }));
+  // Ancestors use prenom + nomComplet (not nom) — a document or event can
+  // belong to an ancestor too, not just the living père/mères/enfants.
+  (db.ancetres||[]).forEach(a=>list.push({ type:'ancetre', uid:a.uid, name:`${a.prenom||''} ${a.nomComplet||''}`.trim() || t('type_ancetre'), sub:t('type_ancetre') }));
   return list;
 }
 function findDocOwner(ownerType, ownerUid){
   if(ownerType==='pere') return db.pere;
   if(ownerType==='mere') return db.meres.find(m=>m.uid===ownerUid);
   if(ownerType==='enfant') return db.enfants.find(c=>c.uid===ownerUid);
+  if(ownerType==='ancetre') return db.ancetres.find(a=>a.uid===ownerUid);
   return null;
 }
 function docOwnerLabel(doc){
   const owner = findDocOwner(doc.ownerType, doc.ownerUid);
   if(!owner) return t('doc_owner_unlinked');
-  const name = `${owner.prenom||''} ${owner.nom||''}`.trim();
+  const name = doc.ownerType==='ancetre'
+    ? `${owner.prenom||''} ${owner.nomComplet||''}`.trim()
+    : `${owner.prenom||''} ${owner.nom||''}`.trim();
   return name || t('doc_owner_unlinked');
 }
 /* 'expired' | 'soon' (≤30 days) | null (no expiry, or far away) */
@@ -7548,8 +7998,15 @@ function renderDocuments(main){
   const members = allFamilyMembersForPicker();
   const q = docFilters.q.trim().toLowerCase();
   const docs = db.documents.filter(d=>{
+    // A "members"-mode restricted document simply doesn't exist for
+    // anyone not on its allow-list — no code can ever reveal it. A
+    // "code"-mode one still shows (as a locked placeholder, see below)
+    // since the whole point of a code is that anyone holding it can get
+    // in without being pre-authorized.
+    if(d.restricted && d.restrictMode==='members' && !hasRestrictedAccess('document', d)) return false;
     if(docFilters.member!=='all' && `${d.ownerType}:${d.ownerUid}` !== docFilters.member) return false;
     if(docFilters.category!=='all' && d.category !== docFilters.category) return false;
+    if(!hasRestrictedAccess('document', d)) return true; // locked card: skip the text-search filter, title is hidden anyway
     if(q && !(`${d.title||''} ${docOwnerLabel(d)}`.toLowerCase().includes(q))) return false;
     return true;
   }).sort((a,b)=> new Date(b.updatedAt||0) - new Date(a.updatedAt||0));
@@ -7564,7 +8021,7 @@ function renderDocuments(main){
         <h1 class="page-title">${esc(t('doc_title'))}</h1>
         <p class="page-desc">${esc(t('doc_desc'))}</p>
       </div>
-      <button class="btn btn-brass admin-only" id="doc-add-btn">${esc(t('btn_add_document'))}</button>
+      <button class="btn btn-brass" data-perm-action="documents" id="doc-add-btn">${esc(t('btn_add_document'))}</button>
     </div>
 
     ${(expiringCount || expiredCount) ? `
@@ -7610,12 +8067,22 @@ function renderDocuments(main){
     ${docs.length ? `
     <div class="doc-grid">
       ${docs.map(d=>{
+        if(!hasRestrictedAccess('document', d)){
+          return `
+          <div class="doc-card doc-card-locked" data-uid="${esc(d.uid)}" data-locked="1">
+            <div class="doc-thumb" style="display:flex;align-items:center;justify-content:center;background:var(--parchment-2);">${icon('lock',34)}</div>
+            <div class="doc-card-body">
+              <div class="doc-card-title" style="display:flex;align-items:center;gap:6px;">${icon('lock',13)} ${esc(t('restrict_locked_card_title'))}</div>
+              <div class="doc-card-owner">${esc(t('restrict_locked_badge'))}</div>
+            </div>
+          </div>`;
+        }
         const status = docExpiryStatus(d);
         const kind = docFileKind(d);
         const thumb = kind==='image' ? `<img src="${esc(d.fileData)}" alt="">` : `<div class="doc-thumb-icon">${icon(DOC_CATEGORY_ICONS[d.category]||'folder',38)}</div>`;
         return `
         <div class="doc-card" data-uid="${esc(d.uid)}">
-          <div class="doc-thumb">${thumb}${status ? `<span class="doc-badge doc-badge-${status}">${status==='expired' ? esc(t('doc_status_expired')) : esc(t('doc_status_soon'))}</span>` : ''}</div>
+          <div class="doc-thumb">${thumb}${status ? `<span class="doc-badge doc-badge-${status}">${status==='expired' ? esc(t('doc_status_expired')) : esc(t('doc_status_soon'))}</span>` : ''}${d.restricted ? `<span class="doc-badge" style="background:var(--ink);color:#fff;display:flex;align-items:center;gap:4px;">${icon('lock',11)}${esc(t('restrict_locked_badge'))}</span>` : ''}</div>
           <div class="doc-card-body">
             <div class="doc-card-cat">${icon(DOC_CATEGORY_ICONS[d.category]||'folder',13)} ${esc(tOpt(d.category))}</div>
             <div class="doc-card-title">${esc(d.title || t('doc_untitled'))}</div>
@@ -7636,11 +8103,19 @@ function renderDocuments(main){
   const addBtn = document.getElementById('doc-add-btn');
   if(addBtn) addBtn.addEventListener('click', ()=>openDocumentModal(null));
   main.querySelectorAll('.doc-card').forEach(card=>{
-    card.addEventListener('click', ()=>openDocumentPreview(card.dataset.uid));
+    card.addEventListener('click', ()=>{
+      const d = db.documents.find(x=>x.uid===card.dataset.uid);
+      if(d && !hasRestrictedAccess('document', d)){
+        promptAccessCode('document', d, ()=>openDocumentPreview(d.uid));
+        return;
+      }
+      openDocumentPreview(card.dataset.uid);
+    });
   });
 }
 
-function openDocumentModal(docUid, presetFile){
+async function openDocumentModal(docUid, presetFile){
+  if(!canManage('documents')){ showToast(t('admin_only_toast')); return; }
   const isNew = !docUid;
   const record = isNew
     ? { category:DOC_CATEGORIES[0], reminder:true, title: presetFile ? (presetFile.fileName||'') : '',
@@ -7648,6 +8123,7 @@ function openDocumentModal(docUid, presetFile){
         fileType: presetFile ? presetFile.fileType : '' }
     : db.documents.find(d=>d.uid===docUid);
   const members = allFamilyMembersForPicker();
+  const restrictAccounts = canSetRestrictions() ? await getFamilyMemberAccounts() : [];
   const bodyHtml = `
     <div class="form-section">
       <div class="form-grid">
@@ -7699,12 +8175,14 @@ function openDocumentModal(docUid, presetFile){
         </div>
       </div>
     </div>
+    ${canSetRestrictions() ? restrictSectionHtml(record, restrictAccounts) : ''}
   `;
 
   openModal({
     title: isNew ? t('modal_add_document') : t('modal_edit_document'),
     bodyHtml,
     onMount(modalEl){
+      wireRestrictSection(modalEl);
       const dropzone = modalEl.querySelector('#doc-dropzone');
       const fileInput = modalEl.querySelector('#doc-file-input');
       const preview = modalEl.querySelector('#doc-dropzone-preview');
@@ -7752,6 +8230,17 @@ function openDocumentModal(docUid, presetFile){
       data.ownerUid = ownerUid;
       data.updatedAt = new Date().toISOString();
       data.updatedBy = session.name;
+      if(canSetRestrictions()){
+        const restrictData = readRestrictSection(modalEl);
+        if(restrictData === null) return false;
+        Object.assign(data, restrictData);
+      } else if(!isNew){
+        // Non-admin editors (permitted members) never see the restrict
+        // section at all — preserve whatever restriction was already on
+        // the record instead of silently wiping it out on save.
+        data.restricted = record.restricted; data.restrictMode = record.restrictMode;
+        data.accessCode = record.accessCode; data.allowedEmails = record.allowedEmails;
+      }
       if(isNew){
         data.uid = uid();
         db.documents.push(data);
@@ -7771,6 +8260,11 @@ function openDocumentModal(docUid, presetFile){
 function openDocumentPreview(docUid){
   const doc = db.documents.find(d=>d.uid===docUid);
   if(!doc) return;
+  if(!hasRestrictedAccess('document', doc)){
+    if(doc.restrictMode==='code') promptAccessCode('document', doc, ()=>openDocumentPreview(docUid));
+    else showToast(t('restrict_no_access_toast'));
+    return;
+  }
   const status = docExpiryStatus(doc);
   const kind = docFileKind(doc);
   const viewerHtml = kind==='image'
@@ -7799,12 +8293,13 @@ function openDocumentPreview(docUid){
       ${viewerHtml}
     </div>
     <div class="modal-foot">
-      <button class="btn btn-ghost admin-only" id="doc-delete-btn">${esc(t('btn_delete'))}</button>
-      <button class="btn btn-brass admin-only" id="doc-edit-btn">${esc(t('btn_edit_document'))}</button>
+      <button class="btn btn-ghost" data-perm-action="documents" id="doc-delete-btn">${esc(t('btn_delete'))}</button>
+      <button class="btn btn-brass" data-perm-action="documents" id="doc-edit-btn">${esc(t('btn_edit_document'))}</button>
       <button class="btn btn-ghost" id="modal-cancel-btn">${esc(t('btn_close'))}</button>
     </div>
   `;
   backdrop.classList.add('active');
+  applyContentPermissions();
   function close(){ backdrop.classList.remove('active'); modal.innerHTML=''; modal.className='modal'; }
   modal.querySelector('#modal-close-btn').addEventListener('click', close);
   modal.querySelector('#modal-cancel-btn').addEventListener('click', close);
@@ -7812,6 +8307,7 @@ function openDocumentPreview(docUid){
   if(editBtn) editBtn.addEventListener('click', ()=>{ close(); openDocumentModal(doc.uid); });
   const delBtn = modal.querySelector('#doc-delete-btn');
   if(delBtn) delBtn.addEventListener('click', ()=>{
+    if(!canManage('documents')){ showToast(t('admin_only_toast')); return; }
     close();
     openConfirmModal(t('confirm_delete_document_title'), t('confirm_delete_document_body')(doc.title||t('doc_untitled')), t('btn_delete'), ()=>{
       db.documents = db.documents.filter(d=>d.uid!==doc.uid);
@@ -7864,11 +8360,13 @@ function renderEvents(main){
   const members = allFamilyMembersForPicker();
   const q = eventFilters.q.trim().toLowerCase();
   const events = db.events.filter(ev=>{
+    if(ev.restricted && ev.restrictMode==='members' && !hasRestrictedAccess('event', ev)) return false;
     if(eventFilters.member!=='all'){
       const [ft, fu] = eventFilters.member.split(':');
       if(!(ev.memberIds||[]).some(m=>m.type===ft && m.uid===fu)) return false;
     }
     if(eventFilters.category!=='all' && ev.category!==eventFilters.category) return false;
+    if(!hasRestrictedAccess('event', ev)) return true; // locked card: skip text-search, content is hidden anyway
     if(q && !(`${ev.title||''} ${ev.description||''}`.toLowerCase().includes(q))) return false;
     return true;
   }).sort((a,b)=> new Date(b.date||0) - new Date(a.date||0));
@@ -7880,7 +8378,7 @@ function renderEvents(main){
         <h1 class="page-title">${esc(t('ev_title'))}</h1>
         <p class="page-desc">${esc(t('ev_desc'))}</p>
       </div>
-      <button class="btn btn-brass admin-only" id="ev-add-btn">${esc(t('btn_add_event'))}</button>
+      <button class="btn btn-brass" data-perm-action="events" id="ev-add-btn">${esc(t('btn_add_event'))}</button>
     </div>
 
     <div class="arbre-tabs" role="tablist" style="margin-bottom:20px;">
@@ -7915,13 +8413,25 @@ function renderEvents(main){
     </div>
     ${events.length ? `
     <div class="timeline">
-      ${events.map(ev=>`
+      ${events.map(ev=>{
+        if(!hasRestrictedAccess('event', ev)){
+          return `
+          <div class="timeline-item timeline-item-locked" data-uid="${esc(ev.uid)}" data-locked="1">
+            <div class="timeline-dot">${icon('lock',16)}</div>
+            <div class="timeline-card">
+              <div class="timeline-card-head"><span class="ev-cat-label" style="display:flex;align-items:center;gap:5px;">${icon('lock',12)}${esc(t('restrict_locked_badge'))}</span></div>
+              <div class="timeline-title">${esc(t('restrict_locked_card_title'))}</div>
+            </div>
+          </div>`;
+        }
+        return `
         <div class="timeline-item" data-uid="${esc(ev.uid)}">
           <div class="timeline-dot">${eventCategoryIconSvg(ev.category)}</div>
           <div class="timeline-card">
             <div class="timeline-card-head">
               <span class="ev-cat-label">${esc(evCatLabel(ev.category))}</span>
               <span class="timeline-date">${esc(eventDateLabel(ev))}</span>
+              ${ev.restricted ? `<span class="doc-badge" style="background:var(--ink);color:#fff;display:inline-flex;align-items:center;gap:4px;">${icon('lock',10)}${esc(t('restrict_locked_badge'))}</span>` : ''}
             </div>
             <div class="timeline-title">${esc(ev.title || t('ev_untitled'))}</div>
             ${ev.description ? `<div class="timeline-desc">${esc(ev.description)}</div>` : ''}
@@ -7932,8 +8442,8 @@ function renderEvents(main){
                 ${ev.media.length>5 ? `<div class="ev-media-more">+${ev.media.length-5}</div>` : ''}
               </div>` : ''}
           </div>
-        </div>
-      `).join('')}
+        </div>`;
+      }).join('')}
     </div>` : `<div class="empty-state"><div class="big-svg">${eventCategoryIconSvg('Autre')}</div>${esc(t('ev_empty'))}</div>`}
     ` : `
     <div class="panel"><div class="panel-body">${renderTreeVizHtml()}</div></div>
@@ -7952,7 +8462,15 @@ function renderEvents(main){
       el.addEventListener('click', (e)=>{ e.stopPropagation(); openEventLightbox(el.dataset.uid, +el.dataset.idx); });
     });
     main.querySelectorAll('.timeline-item').forEach(el=>{
-      el.addEventListener('click', ()=>openEventLightbox(el.dataset.uid, 0));
+      el.addEventListener('click', ()=>{
+        const ev = db.events.find(x=>x.uid===el.dataset.uid);
+        if(ev && !hasRestrictedAccess('event', ev)){
+          if(ev.restrictMode==='code') promptAccessCode('event', ev, ()=>openEventLightbox(ev.uid, 0));
+          else showToast(t('restrict_no_access_toast'));
+          return;
+        }
+        openEventLightbox(el.dataset.uid, 0);
+      });
     });
   } else {
     treeVizClickMode = 'event-member';
@@ -7960,12 +8478,14 @@ function renderEvents(main){
   }
 }
 
-function openEventModal(eventUid, presetMediaUrl){
+async function openEventModal(eventUid, presetMediaUrl){
+  if(!canManage('events')){ showToast(t('admin_only_toast')); return; }
   const isNew = !eventUid;
   const record = isNew
     ? { category:EVENT_CATEGORIES[0], memberIds:[], media: presetMediaUrl ? [{uid:uid(), url:presetMediaUrl, caption:'', order:0}] : [] }
     : db.events.find(e=>e.uid===eventUid);
   const members = allFamilyMembersForPicker();
+  const restrictAccounts = canSetRestrictions() ? await getFamilyMemberAccounts() : [];
   const bodyHtml = `
     <div class="form-section">
       <div class="form-grid">
@@ -8007,12 +8527,14 @@ function openEventModal(eventUid, presetMediaUrl){
         </div>
       </div>
     </div>
+    ${canSetRestrictions() ? restrictSectionHtml(record, restrictAccounts) : ''}
   `;
 
   openModal({
     title: isNew ? t('modal_add_event') : t('modal_edit_event'),
     bodyHtml,
     onMount(modalEl){
+      wireRestrictSection(modalEl);
       const list = record.media ? JSON.parse(JSON.stringify(record.media)) : [];
       const manager = modalEl.querySelector('#ev-media-manager');
       function renderMediaList(){
@@ -8075,6 +8597,14 @@ function openEventModal(eventUid, presetMediaUrl){
       data.media = modalEl._getEventMedia();
       data.updatedAt = new Date().toISOString();
       data.updatedBy = session.name;
+      if(canSetRestrictions()){
+        const restrictData = readRestrictSection(modalEl);
+        if(restrictData === null) return false;
+        Object.assign(data, restrictData);
+      } else if(!isNew){
+        data.restricted = record.restricted; data.restrictMode = record.restrictMode;
+        data.accessCode = record.accessCode; data.allowedEmails = record.allowedEmails;
+      }
       if(isNew){
         data.uid = uid();
         db.events.push(data);
@@ -8094,6 +8624,11 @@ function openEventModal(eventUid, presetMediaUrl){
 function openEventLightbox(eventUid, startIndex){
   const ev = db.events.find(e=>e.uid===eventUid);
   if(!ev) return;
+  if(!hasRestrictedAccess('event', ev)){
+    if(ev.restrictMode==='code') promptAccessCode('event', ev, ()=>openEventLightbox(eventUid, startIndex));
+    else showToast(t('restrict_no_access_toast'));
+    return;
+  }
   let idx = startIndex || 0;
   const backdrop = document.getElementById('modal-backdrop');
   const modal = document.getElementById('modal');
@@ -8120,11 +8655,12 @@ function openEventLightbox(eventUid, startIndex){
         ${media.length>1 ? `<div class="lightbox-counter">${idx+1} / ${media.length}</div>` : ''}
       </div>
       <div class="modal-foot">
-        <button class="btn btn-ghost admin-only" id="ev-delete-btn">${esc(t('btn_delete'))}</button>
-        <button class="btn btn-brass admin-only" id="ev-edit-btn">${esc(t('btn_edit_event'))}</button>
+        <button class="btn btn-ghost" data-perm-action="events" id="ev-delete-btn">${esc(t('btn_delete'))}</button>
+        <button class="btn btn-brass" data-perm-action="events" id="ev-edit-btn">${esc(t('btn_edit_event'))}</button>
         <button class="btn btn-ghost" id="modal-cancel-btn">${esc(t('btn_close'))}</button>
       </div>
     `;
+    applyContentPermissions();
     modal.querySelector('#modal-close-btn').addEventListener('click', close);
     modal.querySelector('#modal-cancel-btn').addEventListener('click', close);
     const prevBtn = modal.querySelector('#lb-prev');
@@ -8142,6 +8678,7 @@ function openEventLightbox(eventUid, startIndex){
     if(editBtn) editBtn.addEventListener('click', ()=>{ close(); openEventModal(ev.uid); });
     const delBtn = modal.querySelector('#ev-delete-btn');
     if(delBtn) delBtn.addEventListener('click', ()=>{
+      if(!canManage('events')){ showToast(t('admin_only_toast')); return; }
       close();
       openConfirmModal(t('confirm_delete_event_title'), t('confirm_delete_event_body')(ev.title||t('ev_untitled')), t('btn_delete'), ()=>{
         db.events = db.events.filter(e=>e.uid!==ev.uid);
@@ -8434,13 +8971,17 @@ function collectActivityEntries(){
   (db.enfants||[]).forEach(c=> push('type_enfant', `${c.prenom||''} ${c.nom||''}`.trim(), c));
   (db.ancetres||[]).forEach(a=> push('type_ancetre', `${a.prenom||''} ${a.nomComplet||''}`.trim(), a));
   if(db.origine) push('type_origine', t('journal_origine_name'), db.origine);
+  // Only these two are genuine, individually-removable log entries (each
+  // backed by one array item with a stable key) — the "last modified"
+  // rows built by push() above are live record data, not log entries, so
+  // they're never selectable for deletion (see openClearJournalConfirm).
   (db.activityLog||[]).forEach(e=>{
     if(new Date(e.at) < cutoff) return;
-    entries.push({ isActivity:true, activityType:e.type, docAction:e.action, name: e.label || t('doc_untitled'), at: e.at, by: e.by || '—' });
+    entries.push({ isActivity:true, activityType:e.type, docAction:e.action, name: e.label || t('doc_untitled'), at: e.at, by: e.by || '—', deletable:true, selectKey:'activity:'+e.uid });
   });
   (db.loginLog||[]).forEach(l=>{
     if(new Date(l.at) < cutoff) return;
-    entries.push({ isLogin:true, name:l.by, at:l.at, by:l.by });
+    entries.push({ isLogin:true, name:l.by, at:l.at, by:l.by, deletable:true, selectKey:'login:'+(l.uid||l.at) });
   });
   entries.sort((a,b)=> new Date(b.at) - new Date(a.at));
   return entries;
@@ -8461,11 +9002,13 @@ function journalEntryIcon(e){
   if(e.labelKey==='type_origine') return {name:'edit', cls:'ji-2'};
   return {name:'users', cls:'ji-1'};
 }
-function journalEntriesHtml(entries){
+function journalEntriesHtml(entries, selectable){
   return entries.length ? entries.map(e=>{
     const ic = journalEntryIcon(e);
+    const canSelect = selectable && e.deletable;
     return `
-    <div class="journal-row">
+    <div class="journal-row${canSelect?' journal-row-selectable':''}" ${canSelect?`data-key="${esc(e.selectKey)}"`:''}>
+      ${selectable ? (canSelect ? `<input type="checkbox" class="journal-select-cb" data-key="${esc(e.selectKey)}" style="width:auto;margin-right:2px;">` : `<span style="width:14px;flex:none;"></span>`) : ''}
       <span class="journal-icon-badge ${ic.cls}">${icon(ic.name,15)}</span>
       <div class="journal-row-main">
         <div class="journal-text">${journalEntryText(e)}</div>
@@ -8477,6 +9020,7 @@ function journalEntriesHtml(entries){
 }
 function renderJournal(main){
   const entries = collectActivityEntries();
+  const canClear = isAdmin(); // journal clearing has always been a true-admin-only power (not managers)
   main.innerHTML = `
     <div class="page-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;">
       <div>
@@ -8486,38 +9030,68 @@ function renderJournal(main){
       </div>
       <div class="toolbar">
         <button class="btn btn-ghost" id="journal-print-btn">${icon('printer',14)}${esc(t('btn_print'))}</button>
-        <button class="btn btn-ghost admin-only super-admin-only" id="journal-clear-btn">${esc(t('btn_clear_journal'))}</button>
+        ${canClear ? `<button class="btn btn-ghost" id="journal-select-all-btn">${esc(t('btn_select_all'))}</button>
+        <button class="btn btn-danger" id="journal-delete-selected-btn" disabled>${icon('trash',14)}${esc(t('btn_delete_selected'))} <span id="journal-selected-count"></span></button>` : ''}
       </div>
     </div>
-    <p class="field-hint" style="margin:-6px 0 16px;">${esc(t('journal_retention_note'))}</p>
-    <div class="journal-card" id="journal-list">${journalEntriesHtml(entries)}</div>
+    <p class="field-hint" style="margin:-6px 0 16px;">${esc(t('journal_retention_note'))}${canClear ? ' '+esc(t('journal_select_hint')) : ''}</p>
+    <div class="journal-card" id="journal-list">${journalEntriesHtml(entries, canClear)}</div>
   `;
-  let latestEntries = entries;
-  document.getElementById('journal-print-btn').addEventListener('click', ()=>printJournal(latestEntries));
-  const clearBtn = document.getElementById('journal-clear-btn');
-  if(clearBtn) clearBtn.addEventListener('click', ()=>openClearJournalConfirm());
-  getLoginLog().then(logins=>{
-    const cutoff = new Date(); cutoff.setMonth(cutoff.getMonth()-3);
-    const loginEntries = logins.filter(l=>new Date(l.at) >= cutoff).map(l=>({ isLogin:true, name:l.by, at:l.at, by:l.by }));
-    const merged = entries.concat(loginEntries).sort((a,b)=> new Date(b.at) - new Date(a.at));
-    latestEntries = merged;
-    const host = document.getElementById('journal-list');
-    if(host) host.innerHTML = journalEntriesHtml(merged);
-  }).catch(()=>{ /* login history is best-effort */ });
+  document.getElementById('journal-print-btn').addEventListener('click', ()=>printJournal(entries));
+  if(!canClear) return;
+
+  const selected = new Set();
+  const deleteBtn = document.getElementById('journal-delete-selected-btn');
+  const selectAllBtn = document.getElementById('journal-select-all-btn');
+  const countLabel = document.getElementById('journal-selected-count');
+  function refreshSelectionUi(){
+    deleteBtn.disabled = selected.size === 0;
+    countLabel.textContent = selected.size ? `(${selected.size})` : '';
+    const allKeys = [...main.querySelectorAll('.journal-select-cb')].map(cb=>cb.dataset.key);
+    const allSelected = allKeys.length>0 && allKeys.every(k=>selected.has(k));
+    selectAllBtn.textContent = allSelected ? t('btn_deselect_all') : t('btn_select_all');
+  }
+  function wireCheckboxes(){
+    main.querySelectorAll('.journal-select-cb').forEach(cb=>{
+      cb.checked = selected.has(cb.dataset.key);
+      cb.addEventListener('change', ()=>{
+        if(cb.checked) selected.add(cb.dataset.key); else selected.delete(cb.dataset.key);
+        refreshSelectionUi();
+      });
+    });
+    refreshSelectionUi();
+  }
+  wireCheckboxes();
+  selectAllBtn.addEventListener('click', ()=>{
+    const allKeys = [...main.querySelectorAll('.journal-select-cb')].map(cb=>cb.dataset.key);
+    const allSelected = allKeys.length>0 && allKeys.every(k=>selected.has(k));
+    if(allSelected) allKeys.forEach(k=>selected.delete(k));
+    else allKeys.forEach(k=>selected.add(k));
+    wireCheckboxes();
+  });
+  deleteBtn.addEventListener('click', ()=>{
+    if(!selected.size) return;
+    openClearJournalConfirm([...selected]);
+  });
 }
-/* Clearing the log is destructive and permanent, so — like deleting the
-   whole account — it requires the admin to re-enter their password before
-   anything happens. Only the genuine append-only logs (document activity,
-   login history) are cleared; each family member's own "last modified"
-   stamp is live record data, not a log entry, and is left untouched. */
-function openClearJournalConfirm(){
+/* Clearing selected journal entries is destructive and permanent, so —
+   like deleting the whole account — it requires the admin to re-enter
+   their password before anything happens. Only the genuine append-only
+   log entries the admin actually checked (document/event activity,
+   login history — each carries a stable "type:uid" selectKey) are
+   removed; each family member's own "last modified" stamp is live record
+   data, not a log entry, so it's never offered as selectable and is
+   always left untouched. Passing no keys (or omitting the argument)
+   clears every removable entry at once, for a full wipe in one step. */
+function openClearJournalConfirm(keys){
   const backdrop = document.getElementById('modal-backdrop');
   const modal = document.getElementById('modal');
   modal.className = 'modal confirm-box';
+  const count = Array.isArray(keys) ? keys.length : null;
   modal.innerHTML = `
     <div class="modal-head"><h3>${esc(t('confirm_clear_journal_title'))}</h3><button class="modal-close" id="modal-close-btn">${icon('x',16)}</button></div>
     <div class="modal-body">
-      <p style="margin:0 0 16px;font-size:13.5px;line-height:1.5;">${esc(t('confirm_clear_journal_body'))}</p>
+      <p style="margin:0 0 16px;font-size:13.5px;line-height:1.5;">${count!==null ? esc(t('confirm_clear_journal_selected_body')(count)) : esc(t('confirm_clear_journal_body'))}</p>
       <div class="field">
         <label>${esc(t('label_confirm_admin_password'))}</label>
         <input type="password" id="clear-journal-password" autocomplete="current-password">
@@ -8538,11 +9112,17 @@ function openClearJournalConfirm(){
     const user = await getUser(session.email);
     const valid = user && await verifyPassword(typedPassword, user.salt, user.passwordHash);
     if(!valid){ showToast(t('toast_password_incorrect')); return; }
-    db.activityLog = [];
-    db.loginLog = [];
+    if(Array.isArray(keys)){
+      const keySet = new Set(keys);
+      db.activityLog = (db.activityLog||[]).filter(e=>!keySet.has('activity:'+e.uid));
+      db.loginLog = (db.loginLog||[]).filter(l=>!keySet.has('login:'+(l.uid||l.at)));
+    } else {
+      db.activityLog = [];
+      db.loginLog = [];
+    }
     close();
     await saveDb();
-    showToast(t('toast_journal_cleared'));
+    showToast(count!==null ? t('toast_journal_entries_deleted')(count) : t('toast_journal_cleared'));
     render();
   });
 }
@@ -9444,11 +10024,12 @@ function renderFieldInput(f, value){
 
 /* ===================== MODAL ===================== */
 
-function openModal({title, bodyHtml, onSave, onMount}){
+function openModal({title, bodyHtml, onSave, onMount, perm}){
   // Defense-in-depth: even though edit/delete controls are hidden from
-  // members in the UI, every write path is re-checked here against the
-  // signed-in role before anything is saved to the family's data.
-  if(!canManage()){ showToast(t('admin_only_toast')); return; }
+  // members without the relevant permission, every write path is
+  // re-checked here against the signed-in role/permissions before
+  // anything is saved to the family's data.
+  if(!canManage(perm)){ showToast(t('admin_only_toast')); return; }
   const backdrop = document.getElementById('modal-backdrop');
   const modal = document.getElementById('modal');
   modal.innerHTML = `
@@ -9465,7 +10046,7 @@ function openModal({title, bodyHtml, onSave, onMount}){
   modal.querySelector('#modal-close-btn').addEventListener('click', close);
   modal.querySelector('#modal-cancel-btn').addEventListener('click', close);
   modal.querySelector('#modal-save-btn').addEventListener('click', ()=>{
-    if(!canManage()){ showToast(t('admin_only_toast')); close(); return; }
+    if(!canManage(perm)){ showToast(t('admin_only_toast')); close(); return; }
     const result = onSave(modal);
     if(result !== false) close();
   });
@@ -9545,7 +10126,8 @@ function openDeleteAccountConfirm(bodyText, onConfirm){
 }
 
 function confirmDelete(type, recordUid){
-  if(!canManage()){ showToast(t('admin_only_toast')); return; }
+  const CONFIRM_DELETE_PERM_MAP = { mere:'meres', enfant:'enfants', ancetre:'arbre' };
+  if(!canManage(CONFIRM_DELETE_PERM_MAP[type])){ showToast(t('admin_only_toast')); return; }
   const backdrop = document.getElementById('modal-backdrop');
   const modal = document.getElementById('modal');
   modal.className = 'modal confirm-box';
